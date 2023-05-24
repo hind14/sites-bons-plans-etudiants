@@ -1,11 +1,22 @@
 const express = require('express')
-const app = express()
-const port = 3000
+const cors = require("cors")
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+const app = express()
+
+
+var corsOptions = {
+  origin: "http://localhost:3000"
+}
+
+app.use(cors(corsOptions))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome" });
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`)
 })
