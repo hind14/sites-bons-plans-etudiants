@@ -1,5 +1,4 @@
 const dbConfig = require("../config/db.config.js")
-
 const Sequelize = require("sequelize")
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
@@ -22,7 +21,7 @@ db.sequelize = sequelize
 
 db.article = require("./article.model.js")(sequelize, Sequelize)
 db.comment = require("./comment.model.js")(sequelize, Sequelize)
-db.article = require("./user.model.js")(sequelize, Sequelize)
+db.user = require("./user.model.js")(sequelize, Sequelize)
 
 db.article.belongsTo(db.user, {
   foreignKey: "userId",
@@ -46,7 +45,8 @@ db.comment.belongsTo(db.article, {
 //Un utilisateur peut avoir plusieurs articles
 db.user.hasMany(db.article, { as: "article"});
 db.user.hasMany(db.comment, {as : "comment"})
-db.posts.hasMany(db.comment, {as : "comment"})
+db.article.hasMany(db.comment, {as : "comment"})
 
 db.sequelize.sync({ force: true })
+
 module.exports = db

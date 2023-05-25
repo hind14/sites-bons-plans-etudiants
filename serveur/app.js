@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require("body-parser")
 const cors = require("cors")
+const db = require("./models")
 
 const app = express()
 
@@ -22,3 +23,12 @@ const PORT = process.env.PORT || 8080
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`)
 })
+
+
+db.sequelize.sync()
+  .then(() => {
+    console.log("Synced db.");
+  })
+  .catch((err) => {
+    console.log("Failed to sync db: " + err.message);
+  });
