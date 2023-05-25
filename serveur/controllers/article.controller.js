@@ -34,7 +34,7 @@ exports.getArticleById = async (req, res, ext) => {
     include: [
       {
         model: Comment,
-        as: "comment"
+        as: "comments"
       },
       {
         model: User,

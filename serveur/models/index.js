@@ -38,12 +38,12 @@ db.comment.belongsTo(db.user, {
 db.comment.belongsTo(db.article, {
   foreignKey: "articleId",
   onDelete: 'CASCADE',
-  as: "article"
+  as: "articles"
 });
 
-db.user.hasMany(db.article, { as: "article"});
-db.user.hasMany(db.comment, {as : "comment"})
-db.article.hasMany(db.comment, {as : "comment"})
+db.user.hasMany(db.article, { as: "articles"});
+db.user.hasMany(db.comment, {as : "comments"})
+db.article.hasMany(db.comment, {as : "comments"})
 
 db.sequelize.sync({ force: false })
 

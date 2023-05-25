@@ -3,9 +3,7 @@ module.exports = (sequelize, Sequelize) => {
         content: {
             type: Sequelize.STRING
           },
-        author: {
-            type: Sequelize.STRING
-        }
+    
     })
   
     return Comment
