@@ -5,8 +5,8 @@ module.exports = app => {
     router.post('/', article.createArticle)
     router.get('/all', article.getAllArticles)
     router.get('/:id', article.getArticleById)
-   // router.put('/:id', article.updateArticle)
-   // router.delete('/:id', article.deleteArticle)
+    router.put('/:id', article.updateArticle)
+    router.delete('/:id', article.deleteArticle)
 
     app.use('/articles', router)
 }
