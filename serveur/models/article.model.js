@@ -8,11 +8,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       category: {
         type: Sequelize.STRING
-      },
-      date: {
-        type: Sequelize.DATEONLY
       }
     })
-  
     return Article
   }

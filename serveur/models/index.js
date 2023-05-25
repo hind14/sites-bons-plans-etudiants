@@ -29,7 +29,6 @@ db.article.belongsTo(db.user, {
   as: "user",
 });
 
-//Un commentaire appartient à un utilisateur, relié par l'id de l'utilisateur
 db.comment.belongsTo(db.user, {
   foreignKey: "userId",
   onDelete: 'CASCADE',
@@ -42,11 +41,10 @@ db.comment.belongsTo(db.article, {
   as: "article"
 });
 
-//Un utilisateur peut avoir plusieurs articles
 db.user.hasMany(db.article, { as: "article"});
 db.user.hasMany(db.comment, {as : "comment"})
 db.article.hasMany(db.comment, {as : "comment"})
 
-db.sequelize.sync({ force: true })
+db.sequelize.sync({ force: false })
 
 module.exports = db
