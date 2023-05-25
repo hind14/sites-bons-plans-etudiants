@@ -5,7 +5,6 @@ const db = require("./models")
 
 const app = express()
 
-
 var corsOptions = {
   origin: "http://localhost:3000"
 }
@@ -18,6 +17,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Hello" });
 })
 
+require("./routes/article.routes")(app)
 
 const PORT = process.env.PORT || 8080
 app.listen(PORT, () => {
