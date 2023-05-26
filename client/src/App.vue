@@ -1,12 +1,19 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/articles">Articles</router-link>
-  </nav>
-  <router-view/>
+   <h1  class="text-3xl font-bold underline">
+    Hello 
+  </h1>
+  <MenuNav />
 </template>
 
+<script>
+import MenuNav from './components/MenuNav.vue'
+
+export default {
+  components: {
+    MenuNav
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
