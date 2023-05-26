@@ -12,16 +12,16 @@
 <script>
 import axios from 'axios'
 export default {
-    mounted() {
-        axios.get('http://localhost:8080/articles/all')
-        .then(response => this.articles = response.data)
-        .catch(err => this.erreur = err);
-    },
     data(){
         return {
             articles:[], 
             erreur: ""
         }
+    },
+    mounted() {
+        axios.get('http://localhost:8080/articles/all')
+        .then(response => this.articles = response.data)
+        .catch(err => this.erreur = err);
     },
  }
 </script>
