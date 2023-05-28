@@ -4,8 +4,8 @@ module.exports = app => {
 
     router.post('/:articleId', comment.createComment)
     router.get('/:articleId', comment.getAllComments)
-    router.put('/:articleId/comments/:id', comment.updateComment)
-    router.delete('/:articleId/comments/:id', comment.deleteComment)
+    router.put('/:articleId/:id', comment.updateComment)
+    router.delete('/:articleId/:id', comment.deleteComment)
 
     app.use('/articles', router)
 }
