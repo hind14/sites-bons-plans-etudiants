@@ -14,9 +14,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get("/", (req, res) => {
-  res.json({ message: "Hello" });
+  res.json({ message: "Hello" })
 })
 
+require('./routes/user.routes')(app)
 require("./routes/article.routes")(app)
 require("./routes/comment.routes")(app)
 
@@ -25,11 +26,10 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`)
 })
 
-
 db.sequelize.sync()
   .then(() => {
-    console.log("Synced db.");
+    console.log("Synced db.")
   })
   .catch((err) => {
-    console.log("Failed to sync db: " + err.message);
-  });
+    console.log("Failed to sync db: " + err.message)
+  })
