@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../models")
 const Article = db.article
 const Comment = db.comment
 const User = db.user
@@ -14,16 +14,16 @@ exports.createArticle = async (req, res, next) => {
   Article.create(article)
     .then(() => res.status(201).json({ message: 'article enregistré !' }))
     .catch(error => res.status(400).json({ error }))
-};
+}
 
 exports.getAllArticles = async (req, res, next) => {
 
   Article.findAll()
     .then((article) => {
-      res.status(200).json(article);
+      res.status(200).json(article)
     })
     .catch((error) => {
-      res.status(400).json({ error: "Problème d'affichage " });
+      res.status(400).json({ error: "Problème d'affichage " })
     })
 }
 
@@ -42,7 +42,7 @@ exports.getArticleById = async (req, res, ext) => {
       }]
   })
     .then((article) => {
-      res.status(200).json(article);
+      res.status(200).json(article)
     })
     .catch((error) => {
       res.status(404).json({ error: "Problème d'affichage " })
@@ -58,21 +58,21 @@ exports.updateArticle = async (req, res, ext) => {
     return res.status(400).json({ error: "Merci de remplir tous les champs." })
   }
 
-  if(Article.userId === userId) {
+  if (Article.userId === userId) {
     Article.update(
       {
         title: req.body.title,
         description: req.body.description,
         category: req.body.category
       },
-      { where: { id: id  }}
-      )
-    .then(() => {
-      res.status(200).json({ message: 'article modifié !' })
-    })
-    .catch((error) => {
-      res.status(404).json({ error: "Erreur lors de la modification." })
-    })
+      { where: { id: id } }
+    )
+      .then(() => {
+        res.status(200).json({ message: 'article modifié !' })
+      })
+      .catch((error) => {
+        res.status(404).json({ error: "Erreur lors de la modification." })
+      })
   }
   else {
     console.log(error)
@@ -86,14 +86,14 @@ exports.deleteArticle = async (req, res, next) => {
   const userId = req.params.userId
   const id = req.params.id
 
-  if(Article.userId === userId) {
-    Article.destroy({ where: { id: id  } })
-    .then((article) => {
-      res.status(200).json(article)
-    })
-    .catch((error) => {
-      res.status(404).json({ error: "Suppression impossible" })
-    })
+  if (Article.userId === userId) {
+    Article.destroy({ where: { id: id } })
+      .then((article) => {
+        res.status(200).json(article)
+      })
+      .catch((error) => {
+        res.status(404).json({ error: "Suppression impossible" })
+      })
   }
   else {
     console.log(error)

@@ -8,8 +8,8 @@ module.exports = app => {
     router.get('/all', article.getAllArticles)
     router.get('/:id', article.getArticleById)
     router.put('/:id', auth, article.updateArticle)
-    router.delete('/:id', auth,  article.deleteArticle)
+    router.delete('/:id', auth, article.deleteArticle)
 
     app.use('/articles', router)
-    
+
 }
