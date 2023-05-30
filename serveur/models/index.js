@@ -26,13 +26,13 @@ db.user = require("./user.model.js")(sequelize, Sequelize)
 db.article.belongsTo(db.user, {
   foreignKey: "userId",
   onDelete: 'CASCADE',
-  as: "user",
+  as: "users",
 })
 
 db.comment.belongsTo(db.user, {
   foreignKey: "userId",
   onDelete: 'CASCADE',
-  as: "user"
+  as: "users"
 })
 
 db.comment.belongsTo(db.article, {
@@ -41,7 +41,7 @@ db.comment.belongsTo(db.article, {
   as: "articles"
 })
 
-db.user.hasMany(db.article, { as: "articles" })
+db.user.hasOne(db.article, { as: "articles" })
 db.user.hasMany(db.comment, { as: "comments" })
 db.article.hasMany(db.comment, { as: "comments" })
 

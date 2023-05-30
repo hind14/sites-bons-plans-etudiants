@@ -11,5 +11,4 @@ module.exports = app => {
     router.delete('/profile/:id', auth, user.deleteUser);
 
     app.use('/', router)
-
 }

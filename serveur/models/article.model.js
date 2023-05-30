@@ -1,14 +1,14 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, DataTypes) => {
 
   const Article = sequelize.define("articles", {
     title: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     content: {
-      type: Sequelize.TEXT
+      type: DataTypes.TEXT
     },
     category: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     }
   })
 

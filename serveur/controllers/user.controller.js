@@ -20,7 +20,7 @@ exports.signup = (req, res, next) => {
         age: req.body.age,
         password: hash
       })
-        .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
+        .then(() => res.status(201).json({ message: 'Utilisateur créé !', jwt }))
         .catch(error => res.status(400).json({ error }))
     })
     .catch(error => {
@@ -47,8 +47,8 @@ exports.login = (req, res, next) => {
               { userId: user.id, email: maskEmail(req.body.email) },
               process.env.jwtsecret,
               { expiresIn: '24h' }
-            )
-          })
+            ),
+          }, console.log(token))
         })
         .catch(error => {
           return res.status(502).json({ error })
@@ -79,7 +79,7 @@ exports.getListOfUsers = (req, res, next) => {
     .then((user) => {
       res.status(200).json(user)
     })
-    .catch(error => res.status(404).json({ error: 'Utilisateur non trouvé' }))
+    .catch(error => res.status(404).json({ error: 'Erreur lors de la récupération des utilisateurs' }))
 
 }
 

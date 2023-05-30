@@ -24,7 +24,7 @@ exports.getAllComments = async (req, res, next) => {
     },
     {
       model: User,
-      as: "user"
+      as: "users"
     }
     ]
   })
@@ -71,7 +71,7 @@ exports.updateComment = async (req, res, ext) => {
 
 exports.deleteComment = async (req, res, next) => {
   const userId = req.params.userId;
-  if (Comment.userId === userId) {
+  if (Comment.userId === userId || User.isAdmin == true) {
     Comment.findOne({
       where: {
         articleId: req.params.articleId,

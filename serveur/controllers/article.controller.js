@@ -4,16 +4,17 @@ const Comment = db.comment
 const User = db.user
 
 exports.createArticle = async (req, res, next) => {
+  const article = { title: req.body.title, content: req.body.content, category: req.body.category, userId: req.body.userId}
 
-  const article = { title: req.body.title, description: req.body.description, category: req.body.category, userId: req.body.userId }
-
-  if (req.body.title === "" || req.body.description === "") {
+  if (req.body.title === "" || req.body.content === "") {
     return res.status(400).json({ error: "Merci de remplir tous les champs." })
   }
 
-  Article.create(article)
+  if(User.isAdmin == true) {
+    Article.create(article)
     .then(() => res.status(201).json({ message: 'article enregistré !' }))
     .catch(error => res.status(400).json({ error }))
+  }
 }
 
 exports.getAllArticles = async (req, res, next) => {
@@ -35,10 +36,6 @@ exports.getArticleById = async (req, res, ext) => {
       {
         model: Comment,
         as: "comments"
-      },
-      {
-        model: User,
-        as: "user"
       }]
   })
     .then((article) => {
@@ -54,7 +51,7 @@ exports.updateArticle = async (req, res, ext) => {
   const userId = req.params.userId
   const id = req.params.id
 
-  if (req.body.title === "" || req.body.description === "") {
+  if (req.body.title === "" || req.body.content === "") {
     return res.status(400).json({ error: "Merci de remplir tous les champs." })
   }
 
@@ -62,7 +59,7 @@ exports.updateArticle = async (req, res, ext) => {
     Article.update(
       {
         title: req.body.title,
-        description: req.body.description,
+        content: req.body.content,
         category: req.body.category
       },
       { where: { id: id } }

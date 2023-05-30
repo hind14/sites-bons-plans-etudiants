@@ -1,22 +1,22 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, DataTypes) => {
 
   const User = sequelize.define("users", {
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       required: true,
       validate: {
         notEmpty: true
       }
     },
     lastname: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       required: true,
       validate: {
         notEmpty: true
       }
     },
     username: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       required: true,
       unique: true,
       validate: {
@@ -24,7 +24,7 @@ module.exports = (sequelize, Sequelize) => {
       }
     },
     age: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       required: true,
       validate: {
         notEmpty: true,
@@ -34,7 +34,7 @@ module.exports = (sequelize, Sequelize) => {
       }
     },
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       unique: true,
       required: true,
       validate: {
@@ -42,14 +42,14 @@ module.exports = (sequelize, Sequelize) => {
       }
     },
     password: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       required: true,
       validate: {
         notEmpty: true
       }
     },
     isAdmin: {
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: false
     }
   })
