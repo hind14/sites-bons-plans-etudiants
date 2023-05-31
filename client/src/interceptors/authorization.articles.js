@@ -1,22 +1,29 @@
 import axios from "./common.path"
 
-const token = JSON.parse(localStorage.getItem("user"))
+const token = JSON.parse(localStorage.getItem("user")).token
+
 const articlesPath = "/articles"
-const communHeaders =  {headers: {
-  authorization: `Bearer ${token}`
-}}
+const communHeaders = {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+}
 
 class ArticleRoutes {
+  create(data) {
+    return axios.post(articlesPath, data, communHeaders)
+  }
+
   getAll() {
-    return axios.get(`${articlesPath}/all`, communHeaders)
+    return axios.get(`${articlesPath}/all`)
   }
 
   get(id) {
-    return axios.get(`${articlesPath}/${id}`, communHeaders)
+    return axios.get(`${articlesPath}/${id}`)
   }
 
-  create(data) {
-    return axios.post(articlesPath , data, communHeaders)
+  put(id) {
+    return axios.put(`${articlesPath}/${id}`, communHeaders)
   }
 
   delete(id) {

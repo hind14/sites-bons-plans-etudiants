@@ -1,14 +1,14 @@
 module.exports = app => {
 
     const router = require("express").Router()
-    const article = require('../controllers/article.controller.js')
     const auth = require('../middleware/auth.js')
-
-    router.post('/', article.createArticle)
+    const article = require('../controllers/article.controller.js')
+   
+    router.post('/', auth, article.createArticle)
     router.get('/all', article.getAllArticles)
     router.get('/:id', article.getArticleById)
-    router.put('/:id', article.updateArticle)
-    router.delete('/:id', article.deleteArticle)
+    router.put('/:id',  auth, article.updateArticle)
+    router.delete('/:id', auth, article.deleteArticle)
 
     app.use('/articles', router)
 

@@ -97,7 +97,7 @@
     methods: {
       signup() {
         axios
-          .post("http://localhost:8080/inscription", {
+          .post("http://localhost:8080/auth/inscription", {
             name: this.name,
             lastname: this.lastname,
             username : this.username,

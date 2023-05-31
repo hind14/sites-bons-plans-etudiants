@@ -26,13 +26,14 @@ export default {
     },
     methods: {
         connexion() {
-            axios.post('http://localhost:8080/connexion', {email: this.email, password : this.password})
+            axios.post('http://localhost:8080/auth/connexion', { email: this.email, password: this.password })
                 .then((res) => {
-                    localStorage.setItem("user", JSON.stringify(res.data));
-                    this.$router.push('articles')
+                    localStorage.setItem("user", JSON.stringify(res.data))
+                    this.$router.push('/articles')
+                    console.log(res.data.token)
                 })
                 .catch((error) => {
-                    console.log(error);
+                    console.log(error)
                 })
         }
     }
