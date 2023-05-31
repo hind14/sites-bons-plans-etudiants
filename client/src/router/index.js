@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import DisplayArticlesView from '../views/DisplayArticlesView.vue'
 import AddArticleView from '../views/AddArticleView.vue'
 import DisplayOneArticleView from '../views/DisplayOneArticleView.vue'
+import SignupView from '../views/SignupView.vue'
 import LoginView from '../views/LoginView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
 
@@ -12,6 +13,12 @@ const routes = [
     name: 'home',
     component: HomeView
   },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: SignupView
+  }
+  ,
   {
     path: '/login',
     name: 'login',

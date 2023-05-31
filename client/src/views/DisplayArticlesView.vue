@@ -19,7 +19,7 @@ export default {
     data(){
         return {
             articles:[], 
-            erreur: ""
+            erreur: "oups"
         }
     },
     mounted() {

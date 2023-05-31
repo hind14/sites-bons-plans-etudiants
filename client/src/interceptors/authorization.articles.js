@@ -1,6 +1,6 @@
 import axios from "./common.path"
 
-const token = JSON.parse(localStorage.getItem("user")).token
+const token = JSON.parse(localStorage.getItem("user"))
 const articlesPath = "/articles"
 const communHeaders =  {headers: {
   authorization: `Bearer ${token}`
