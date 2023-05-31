@@ -2,7 +2,8 @@
   <div class="one-article">
     <div id="article-container">
       {{ article.title }}
-      <div id="article-content">{{ article.description }}</div>
+      <div id="article-content">{{ article.content }}</div>
+      <button @click="updateArticle">Modifier</button> 
         <button @click="deleteArticle">Supprimer</button> 
     </div>
   </div>
@@ -23,6 +24,9 @@ export default {
     }
   },
   methods: {
+    updateArticle() {
+      
+    },
     deleteArticle() {
       axios.delete(`http://localhost:8080/articles/${this.article.id}`)
         .then(() => {

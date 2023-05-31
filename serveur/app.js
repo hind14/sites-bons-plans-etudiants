@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require("body-parser")
 const cors = require("cors")
 const db = require("./models")
+require('dotenv').config()
 
 const app = express()
 
@@ -13,8 +14,12 @@ app.use(cors(corsOptions))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get("/", (req, res) => {
-  res.json({ message: "Hello" })
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
+  next()
 })
 
 require('./routes/user.routes')(app)

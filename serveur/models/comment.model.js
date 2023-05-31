@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
 
   const Comment = sequelize.define("comments", {
-    content: {
+    commentContent: {
       type: DataTypes.STRING,
       required: true,
       validate: {

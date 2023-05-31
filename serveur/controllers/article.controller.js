@@ -4,17 +4,24 @@ const Comment = db.comment
 const User = db.user
 
 exports.createArticle = async (req, res, next) => {
-  const article = { title: req.body.title, content: req.body.content, category: req.body.category, userId: req.body.userId}
+  const article = {
+    title: req.body.title,
+    content: req.body.content,
+    category: req.body.category,
+    userId: req.body.userId
+  }
 
-  if (req.body.title === "" || req.body.content === "") {
+  if (article.userId == null) {
+    return res.status(400).json({ error: "Pas d'utilisateur..." })
+  } 
+  if (article.title == null ||
+      article.content == null ||
+      article.category == null) {
     return res.status(400).json({ error: "Merci de remplir tous les champs." })
   }
-
-  if(User.isAdmin == true) {
-    Article.create(article)
+  Article.create(article)
     .then(() => res.status(201).json({ message: 'article enregistré !' }))
     .catch(error => res.status(400).json({ error }))
-  }
 }
 
 exports.getAllArticles = async (req, res, next) => {
@@ -47,11 +54,10 @@ exports.getArticleById = async (req, res, ext) => {
 }
 
 exports.updateArticle = async (req, res, ext) => {
-
   const userId = req.params.userId
   const id = req.params.id
 
-  if (req.body.title === "" || req.body.content === "") {
+  if (req.body.title == null || req.body.content == null || req.body.category == null) {
     return res.status(400).json({ error: "Merci de remplir tous les champs." })
   }
 

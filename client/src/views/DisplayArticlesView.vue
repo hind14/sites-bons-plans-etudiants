@@ -3,7 +3,7 @@
     <ul>
         <li v-for="article in articles" :key="article.id ">
             {{  article.title  }}
-            {{ article.description}} 
+            {{ article.content}} 
             <router-link :to="{ name: 'display-one-article', params: { id : article.id } }" >
                 Voir l'article
             </router-link>
@@ -13,7 +13,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import ArticleRoutes from '../interceptors/authorization.articles'
+
 export default {
     data(){
         return {
@@ -22,7 +23,7 @@ export default {
         }
     },
     mounted() {
-        axios.get('http://localhost:8080/articles/all')
+        ArticleRoutes.getAll()
         .then(response => this.articles = response.data)
         .catch(err => this.erreur = err)
     },

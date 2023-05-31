@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const db = require('../models')
 const User = db.user
 const passwordValidator = require('../middleware/password-validator')
-require('dotenv').config
+
 
 exports.signup = (req, res, next) => {
 
@@ -16,11 +16,11 @@ exports.signup = (req, res, next) => {
         name: req.body.name,
         lastname: req.body.lastname,
         username: req.body.username,
-        email: req.body.email,
         age: req.body.age,
+        email: req.body.email,
         password: hash
       })
-        .then(() => res.status(201).json({ message: 'Utilisateur créé !', jwt }))
+        .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
         .catch(error => res.status(400).json({ error }))
     })
     .catch(error => {
@@ -44,11 +44,14 @@ exports.login = (req, res, next) => {
           res.status(200).json({
             userId: user.id,
             token: jwt.sign(
-              { userId: user.id, email: maskEmail(req.body.email) },
+              {
+                userId: user.id,
+                email: maskEmail(req.body.email)
+              },
               process.env.jwtsecret,
               { expiresIn: '24h' }
             ),
-          }, console.log(token))
+          })
         })
         .catch(error => {
           return res.status(502).json({ error })
@@ -56,14 +59,12 @@ exports.login = (req, res, next) => {
         )
     })
     .catch(error => res.status(501).json({ error }))
-
 }
 
 exports.getUser = (req, res, next) => {
 
   const id = req.params.id
   User.findOne({
-    attributes: ['id', 'name', 'lastname', 'username', 'email', 'age', 'role', 'createdAt', 'updatedAt'],
     where: { id: id }
   })
     .then((user) => {

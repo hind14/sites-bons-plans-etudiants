@@ -41,7 +41,7 @@ db.comment.belongsTo(db.article, {
   as: "articles"
 })
 
-db.user.hasOne(db.article, { as: "articles" })
+db.user.hasMany(db.article, { as: "articles" })
 db.user.hasMany(db.comment, { as: "comments" })
 db.article.hasMany(db.comment, { as: "comments" })
 

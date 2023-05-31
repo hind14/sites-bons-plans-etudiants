@@ -5,14 +5,23 @@ const User = db.user
 
 exports.createComment = async (req, res, next) => {
   const comment = {
-    content: req.body.content,
+    commentContent: req.body.commentContent,
     userId: req.body.userId,
     articleId: req.body.articleId
   }
 
+  if (comment.userId == null) {
+    return res.status(400).json({ error: "Pas d'utilisateur" })
+  } 
+  if (comment.articleId == null) {
+    return res.status(400).json({ error: "Pas d'article selectionné" })
+  } 
+  if(comment.commentContent == "") {
+    return res.status(400).json({ error: "Impossible d'enregistrer le comentaire" })
+  }
   Comment.create(comment)
-    .then(() => res.status(201).json({ message: 'commentaire enregistré !' }))
-    .catch(error => res.status(400).json({ error: "pb lors de l'enregistrement" }))
+    .then(() => res.status(201).json({ message: 'Commentaire enregistré !' }))
+    .catch(error => res.status(400).json({ error: "Problème lors de l'enregistrement" }))
 }
 
 exports.getAllComments = async (req, res, next) => {
@@ -38,23 +47,24 @@ exports.getAllComments = async (req, res, next) => {
 
 exports.updateComment = async (req, res, ext) => {
 
-  const content = req.body.content
+  const commentContent = req.body.commentContent
   const userId = req.params.userId
+  const articleId = req.params.articleId
   const id = req.params.id
 
-  if (content === "") {
+  if (commentContent === "") {
     return res.status(400).json({ error: "Commentaire vide !." })
   }
 
   if (Comment.userId === userId) {
     Comment.update(
       {
-        content: content,
+        commentContent: commentContent,
       },
       {
         where: {
           id: id,
-          articleId: req.params.articleId
+          articleId: articleId
         }
       })
       .then(() => {
