@@ -61,6 +61,24 @@ exports.login = (req, res, next) => {
     .catch(error => res.status(501).json({ error }))
 }
 
+exports.isAdmin = (req, res, next) => {
+  User.findByPk(req.userId).then(user => {
+    user.getRoles().then(roles => {
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i].name === "admin") {
+          next();
+          return;
+        }
+      }
+
+      res.status(403).send({
+        message: "Require Admin Role!"
+      });
+      return;
+    });
+  });
+};
+
 exports.getUser = (req, res, next) => {
 
   const id = req.params.id
@@ -70,17 +88,16 @@ exports.getUser = (req, res, next) => {
     .then((user) => {
       res.status(200).json({ user })
     })
-    .catch(error => res.status(404).json({ error: 'Utilisateur non trouvé' }))
+    .catch(() => res.status(404).json({ error: 'Utilisateur non trouvé' }))
 
 }
 
 exports.getListOfUsers = (req, res, next) => {
-
   User.findAll()
     .then((user) => {
       res.status(200).json(user)
     })
-    .catch(error => res.status(404).json({ error: 'Erreur lors de la récupération des utilisateurs' }))
+    .catch(() => res.status(404).json({ error: 'Erreur lors de la récupération des utilisateurs' }))
 
 }
 

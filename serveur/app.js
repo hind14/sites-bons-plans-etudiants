@@ -1,8 +1,9 @@
 const express = require('express')
 const bodyParser = require("body-parser")
 const cors = require("cors")
-const db = require("./models")
 require('dotenv').config()
+const db = require("./models")
+const Role = db.role
 
 const app = express()
 
@@ -30,9 +31,14 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`)
 })
 
-db.sequelize.sync()
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to my application." });
+});
+
+db.sequelize.sync({force: false})
   .then(() => {
-    console.log("Synced db.")
+    console.log("Drop and Resync Db.")
+    initial();
   })
   .catch((err) => {
     console.log("Failed to sync db: " + err.message)

@@ -2,6 +2,7 @@ const db = require("../models")
 const Article = db.article
 const Comment = db.comment
 const User = db.user
+const Role = db.role
 
 exports.createArticle = async (req, res, next) => {
   const article = {
@@ -11,9 +12,9 @@ exports.createArticle = async (req, res, next) => {
     userId: req.body.userId
   }
 
-  // if (article.userId == null) {
-  //   return res.status(400).json({ error: "Pas d'utilisateur..." })
-  // } 
+  if (article.userId == null) {
+    return res.status(400).json({ error: "Pas d'utilisateur..." })
+  } 
   if (article.title == null ||
       article.content == null ||
       article.category == null) {

@@ -47,10 +47,6 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: true
       }
-    },
-    isAdmin: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
     }
   })
 

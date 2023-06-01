@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import ArticleRoutes from '../interceptors/authorization.articles'
+import axios from 'axios'
 
 export default {
 
@@ -28,7 +28,7 @@ export default {
       
     },
     deleteArticle() {
-      ArticleRoutes.delete(this.article.id)
+      axios.delete(`http://localhost:8080/articles/${this.article.id}`)
         .then(() => {
           this.$router.push({ name: "display-all-articles" });
         })
@@ -40,7 +40,7 @@ export default {
 
     mounted() {
       const id = this.$route.params.id
-      ArticleRoutes.get(id)
+      axios.get(`http://localhost:8080/articles/${id}`)
         .then((res) => {
           this.article = res.data;
         })

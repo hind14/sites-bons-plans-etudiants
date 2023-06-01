@@ -32,7 +32,7 @@
 </template>
   
 <script>
-import ArticleRoutes from '../interceptors/authorization.articles.js'
+import axios from 'axios'
 
 export default {
   data() {
@@ -53,7 +53,7 @@ export default {
         content: this.article.content,
         category: this.article.category,
       }
-      ArticleRoutes.create(data)
+      axios.create("http://localhost:8080/articles", data)
         .then(() => {
           this.submitted = true;
         })

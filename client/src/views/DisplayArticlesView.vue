@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import ArticleRoutes from '../interceptors/authorization.articles'
+import axios from 'axios'
 
 export default {
     data(){
@@ -23,7 +23,7 @@ export default {
         }
     },
     mounted() {
-        ArticleRoutes.getAll()
+        axios.get("http://localhost:8080/articles/all")
         .then(response => this.articles = response.data)
         .catch(err => this.erreur = err)
     },

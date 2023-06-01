@@ -30,7 +30,6 @@ export default {
                 .then((res) => {
                     localStorage.setItem("user", JSON.stringify(res.data))
                     this.$router.push('/articles')
-                    console.log(res.data.token)
                 })
                 .catch((error) => {
                     console.log(error)
