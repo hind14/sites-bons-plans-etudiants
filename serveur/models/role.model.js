@@ -1,11 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
-
-    const Role = sequelize.define("roles", {
-      name: {
-        type: DataTypes.STRING,
-      },
-    })
-  
-    return Role
-  
-  }
+const Role = {
+  Admin: "admin",
+  User: "user"
+}

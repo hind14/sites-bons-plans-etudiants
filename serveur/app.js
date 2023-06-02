@@ -3,7 +3,6 @@ const bodyParser = require("body-parser")
 const cors = require("cors")
 require('dotenv').config()
 const db = require("./models")
-const Role = db.role
 
 const app = express()
 
@@ -22,7 +21,7 @@ app.use((req, res, next) => {
   next()
 })
 
-require('./routes/user.routes')(app)
+require("./routes/user.routes")(app)
 require("./routes/article.routes")(app)
 require("./routes/comment.routes")(app)
 
@@ -32,14 +31,15 @@ app.listen(PORT, () => {
 })
 
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to my application." });
-});
+  res.json({ message: "Welcome to my application." })
+})
 
 db.sequelize.sync({force: false})
   .then(() => {
-    console.log("Drop and Resync Db.")
-    initial();
+    console.log("Resync Db.")
+   
   })
   .catch((err) => {
     console.log("Failed to sync db: " + err.message)
   })
+

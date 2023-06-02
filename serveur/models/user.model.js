@@ -1,3 +1,5 @@
+const Role = require('./role.model')
+
 module.exports = (sequelize, DataTypes) => {
 
   const User = sequelize.define("users", {
@@ -47,6 +49,11 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: true
       }
+    },
+    role: {
+      type: DataTypes.STRING,
+      required: true,
+      defaultValue: "user"
     }
   })
 

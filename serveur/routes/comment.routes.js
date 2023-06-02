@@ -4,10 +4,10 @@ module.exports = app => {
     const comment = require('../controllers/comment.controller.js')
     const auth = require('../middleware/auth.js')
 
-    router.post('/:articleId/com', auth, comment.createComment)
+    router.post('/:articleId/com', auth.userAuth, comment.createComment)
     router.get('/:articleId/com', comment.getAllComments)
-    router.put('/:articleId/com/:id', auth, comment.updateComment)
-    router.delete('/:articleId/com/:id', auth, comment.deleteComment)
+    router.put('/:articleId/com/:id', auth.userAuth, comment.updateComment)
+    router.delete('/:articleId/com/:id', auth.userAuth, auth.adminAuth, comment.deleteComment)
 
     app.use('/articles', router)
 

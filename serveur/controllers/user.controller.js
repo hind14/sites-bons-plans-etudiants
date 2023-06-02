@@ -4,9 +4,7 @@ const db = require('../models')
 const User = db.user
 const passwordValidator = require('../middleware/password-validator')
 
-
 exports.signup = (req, res, next) => {
-
   if (!passwordValidator.validate(req.body.password)) {
     return res.status(401).json({ error: 'Mot de passe invalide !' })
   }
@@ -31,7 +29,9 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
 
-  User.findOne({ where: { email: req.body.email } })
+  User.findOne({
+    where: { email: req.body.email }
+  })
     .then(user => {
       if (!user) {
         return res.status(401).json({ error: 'Email incorrect !' })
@@ -46,10 +46,11 @@ exports.login = (req, res, next) => {
             token: jwt.sign(
               {
                 userId: user.id,
-                email: maskEmail(req.body.email)
+                email: maskEmail(req.body.email),
+                role: user.role
               },
               process.env.jwtsecret,
-              { expiresIn: '24h' }
+              { expiresIn: '2h' }
             ),
           })
         })
@@ -61,31 +62,13 @@ exports.login = (req, res, next) => {
     .catch(error => res.status(501).json({ error }))
 }
 
-exports.isAdmin = (req, res, next) => {
-  User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
-      for (let i = 0; i < roles.length; i++) {
-        if (roles[i].name === "admin") {
-          next();
-          return;
-        }
-      }
-
-      res.status(403).send({
-        message: "Require Admin Role!"
-      });
-      return;
-    });
-  });
-};
-
 exports.getUser = (req, res, next) => {
 
   const id = req.params.id
   User.findOne({
     where: { id: id }
   })
-    .then((user) => {
+    .then(user => {
       res.status(200).json({ user })
     })
     .catch(() => res.status(404).json({ error: 'Utilisateur non trouvé' }))
@@ -94,10 +77,10 @@ exports.getUser = (req, res, next) => {
 
 exports.getListOfUsers = (req, res, next) => {
   User.findAll()
-    .then((user) => {
-      res.status(200).json(user)
+    .then(user => {
+        res.status(200).json(user) 
     })
-    .catch(() => res.status(404).json({ error: 'Erreur lors de la récupération des utilisateurs' }))
+    .catch(() => res.status(403).json({ error: 'Erreur lors de la récupération des utilisateurs' }))
 
 }
 
