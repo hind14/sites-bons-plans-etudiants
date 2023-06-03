@@ -4,13 +4,17 @@ module.exports = app => {
     const user = require('../controllers/user.controller.js')
     const auth = require('../middleware/auth.js')
 
-    router.post('/auth/inscription', user.signup)
-    router.post('/auth/connexion', user.login)
+    // Signup and Login
+    router.post('/auth/signup', user.signup)
+    router.post('/auth/login', user.login)
     
+    //Admin route
     router.get('/users', auth.adminAuth, user.getListOfUsers)
+    router.delete('/users/:id', auth.adminAuth,  user.deleteUser)
 
-    router.get('/profiles/:id', auth.userAuth, user.getUser)
-    router.delete('/profiles/:id', auth.userAuth,  user.deleteUser)
+    //User route
+    router.get('/users/:id', auth.userAuth, user.getUser)
+    router.delete('/users/:id', auth.userAuth,  user.deleteUser)
 
     app.use('/', router)
 }

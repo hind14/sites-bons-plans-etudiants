@@ -25,7 +25,7 @@ exports.userAuth = (req, res, next) => {
         const token = req.headers.authorization.split(' ')[1]
         const decodedToken = jwt.verify(token, process.env.jwtsecret)
         const userId = decodedToken.userId
-        if (req.body.userId && req.body.userId !== userId) {
+        if (req.params.id != userId) {
             throw 'Invalid user ID'
         } else {
             next()
