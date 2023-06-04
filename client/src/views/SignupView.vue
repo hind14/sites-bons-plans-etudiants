@@ -1,122 +1,82 @@
 <template>
-    <div class="signup">
+  <h2>N'attendez plus, inscrivez-vous !</h2>
 
-      <div id="form-style">
-        <h1>N'attendez plus, inscrivez-vous !</h1>
-        <form @submit.prevent="signup" id="form">
-          <div class="signup-inputs">
-            <label for="name">Prénom</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              v-model="name"
-              required="true"
-            />
-          </div>
+  <Form @submit="toSignUp" :validation-schema="schema">
+    Prénom : 
+    <Field name="name"  v-model="user.name" /> 
+    <ErrorMessage name="name" />
 
-          <div class="signup-inputs">
-            <label for="lastname">Nom</label>
-            <input
-              type="text"
-              id="lastname"
-              name="lastname"
-              v-model="lastname"
-              required="true"
-            />
-          </div>
-          
-          <div class="signup-inputs">
-            <label for="username">username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              v-model="username"
-              required="true"
-            />
-          </div>
+    Nom : 
+    <Field name="lastname"   v-model="user.lastname"/>
+    <ErrorMessage name="lastname" />
 
-          <div class="signup-inputs">
-            <label for="age">age</label>
-            <input
-              type="text"
-              id="age"
-              name="age"
-              v-model="age"
-              required="true"
-            />
-          </div>
+    Username : 
+    <Field name="username"  v-model="user.username"/> 
+    <ErrorMessage name="username" />
 
-          <div class="signup-inputs">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              v-model="email"
-              required="true"
-            />
-          </div>
+    Age : 
+    <Field name="age"   v-model="user.age"/>
+    <ErrorMessage name="age" />
 
-          <div class="signup-inputs">
-            <label for="password">Mot de passe</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              v-model="password"
-              required="true"
-            />
-          </div>
-  
-          <button id="signup-style">Inscription</button>
-        </form>
-        <div>
-          Déja membre?
-          <router-link to="/login">Connectez-vous !</router-link>
-        </div>
-      </div>
-    </div>
-  </template>
-  
-  <script>
-  import axios from "axios"
-  
-  export default {
-    data() {
-      return {
-        name: "",
-        lastname: "",
-        username: "",
-        age: "",
-        email: "",
-        password: "",
-      }
-    },
-    methods: {
-      signup() {
-        axios
-          .post("http://localhost:8080/auth/inscription", {
-            name: this.name,
-            lastname: this.lastname,
-            username : this.username,
-            age: this.age,
-            email: this.email,
-            password: this.password,
-          })
-          .then(() => {
+    Email : 
+    <Field name="email"  v-model="user.email"/> 
+    <ErrorMessage name="email" />
 
-            this.$router.push("login")
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      },
-    },
-  }
-  </script>
-  
-  <style>
-  
-  </style>
+    Mot de passe :
+    <Field name="password" type="password" v-model="user.password"/> 
+    <ErrorMessage name="password" />
+
+    <button>S'inscrire</button>
+  </Form>
+
+  <div>
+    Déja membre?
+    <router-link to="/login">Connectez-vous !</router-link>
+  </div>
+
+</template>
+
+<script setup>
+
+import { Field, Form, ErrorMessage } from 'vee-validate'
+import * as yup from 'yup'
+import YupPassword from 'yup-password'
+import axios from 'axios'
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
+YupPassword(yup)
+const schema = yup.object({
+  name: yup.string().required("Ce champ est obligatoire ").trim(),
+  lastname: yup.string().required("Ce champ est obligatoire").trim(),
+  username: yup.string().required("Ce champ est obligatoire").trim(),
+  age: yup.number().required("Ce champ est obligatoire").typeError("Veuillez indiquer uniqement des nombres"),
+  email: yup.string().required("Ce champ est obligatoire").email("L'email n'est pas correct").trim(),
+  password: yup.string().required("oups vous n'avez rien écrit")
+  .minNumbers(2, 'Le mot de passe doit contenir  au moins deux chiffres')
+  .max(20).typeError("Le mot de passe doit contenirune majuscule").trim("oups vous n'avez rien écrit"),
+})
+
+const router = useRouter()
+const user = reactive({ 
+      name: '',
+      lastname: '',
+      username: '',
+      age: '',
+      email: '',
+      password: ''
+    })
+
+const toSignUp = () => {
+  axios
+    .post('http://localhost:8080/auth/signup', user)
+    .then(() => {
+      router.push({ name: 'login'})
+    })
+    .catch((error) => {
+      console.log("errr", error)
+    })
+}
+</script>
+
+<style></style>
