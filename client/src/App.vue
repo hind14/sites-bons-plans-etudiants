@@ -1,5 +1,5 @@
 <template>
-  <MenuNav />
+ <MenuNav />
 </template>
 
 <script>
@@ -7,8 +7,8 @@ import MenuNav from './components/MenuNav.vue'
 
 export default {
   components: {
-    MenuNav
-  }
+    MenuNav,
+}
 }
 </script>
 <style>
