@@ -1,41 +1,46 @@
 <template>
-    <h1>Authentification</h1>
-    <form @submit.prevent="connexion">
-        <div>
-            <label for="email">Email</label>
-            <input type="email" v-model="email" id="email" required="true">
-        </div>
-        <div>
-            <label for="password">Mot de passe</label>
-            <input type="password" v-model="password" id="password" required="true">
-        </div>
+    <h2>Connexion</h2>
+
+    <Form @submit="toLogin" :validation-schema="schema">
+
+        Email :
+        <Field name="email" v-model="user.email" />
+        <ErrorMessage name="email" />
+
+        Mot de passe :
+        <Field name="password" type="password" v-model="user.password" />
+        <ErrorMessage name="password" />
+
         <button>Se connecter</button>
-    </form>
+
+    </Form>
 </template>
     
 
-<script>
+<script setup>
 import axios from 'axios'
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { Field, Form, ErrorMessage } from 'vee-validate'
 
-export default {
-    data() {
-        return {
-            email: '',
-            password: ''
-        }
-    },
-    methods: {
-        connexion() {
-            axios.post('http://localhost:8080/auth/connexion', { email: this.email, password: this.password })
-                .then((res) => {
-                    localStorage.setItem("user", JSON.stringify(res.data))
-                    this.$router.push('/articles')
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-        }
-    }
+const router = useRouter()
+const user = reactive({
+    email: '',
+    password: ''
+})
+
+const toLogin = () => {
+    axios.post('http://localhost:8080/auth/login', user)
+        .then((res) => {
+            localStorage.setItem("user", res.data)
+            router.push('/articles')
+        })
+        .catch((error) => {
+            if(error.data !=user.password) {
+                console.log("bad password");
+            }
+            console.log("Erreur lors de la connexion", error)
+        })
 }
 </script>
       
