@@ -2,8 +2,12 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import PublicPageView from '../views/public/PublicPageView.vue'
 import HomeView from '../views/public/HomeView.vue'
 import DisplayArticlesView from '../views/public/DisplayArticlesView.vue'
-import AddArticleView from '../views/admin/AddArticleView.vue'
 import DisplayOneArticleView from '../views/public/DisplayOneArticleView.vue'
+
+import AdminPageView from '../views/admin/AdminPageView.vue'
+import AddArticleView from '../views/admin/AddArticleView.vue'
+import DisplayUsersView from '../views/admin/DisplayUsersView.vue'
+
 import SignupView from '../views/public/SignupView.vue'
 import LoginView from '../views/public/LoginView.vue'
 import NotFoundView from '../views/NotFoundView.vue'
@@ -21,11 +25,14 @@ const routes = [
       { path: '/articles/:id', name: 'display-one-article', component: DisplayOneArticleView },
     ]
   },
-
   {
-    path: '/add-article',
-    name: 'add-article',
-    component: AddArticleView
+    path: '/admin',
+    name: 'admin',
+    component: AdminPageView,
+    children: [
+      { path: '/users', name: 'users', component: DisplayUsersView  },
+      { path: '/add-article', name: 'add-article', component: AddArticleView },
+    ]
   },
   {
     path: '/:pathMatch(.*)',

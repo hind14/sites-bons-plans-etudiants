@@ -1,6 +1,5 @@
 <template>
     <div class="public-page">
-            public page
         <PublicNav/>
         <router-view />
     </div>
