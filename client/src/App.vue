@@ -1,14 +1,11 @@
 <template>
- <MenuNav />
+<router-view/>
 </template>
 
 <script>
-import MenuNav from './components/MenuNav.vue'
 
 export default {
-  components: {
-    MenuNav,
-}
+
 }
 </script>
 <style>
