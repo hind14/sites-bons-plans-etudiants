@@ -5,20 +5,23 @@
    
     <router-link to="/admin">Admin</router-link> |
 
-    <router-link to="/signup"> Inscription </router-link>
-    <div>
       <router-link to="/login"> Connexion </router-link>
-      <router-link to="/" @click="logout" class="router-style"> Deconnexion</router-link>
-    </div>
+ 
+  
   </nav>
 </template>
 
 <script>
+import { accountService } from '@/_services'
+
 export default {
   methods: {
     logout() {
-      localStorage.removeItem("user")
+      accountService.logout()
       this.$router.push("/articles")
+    },
+    isLoggedIn() {
+      accountService.isLogged()
     }
   }
 }
