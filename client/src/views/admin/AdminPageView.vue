@@ -1,17 +1,17 @@
 <template>
     <div class="admin-page">
             admin page
-        <!-- <router-link to="/add-article"> Ajouter un article</router-link> | -->
+       <AdminNav/>
         <router-view />
     </div>
 </template>
 
 <script>
-// import PublicNav from'../../components/PublicNav.vue'
+import AdminNav from'../../components/AdminNav.vue'
 export default {
-    // components: {
-    //     PublicNav
-    // }
+    components: {
+        AdminNav
+    }
 }
 </script>
 

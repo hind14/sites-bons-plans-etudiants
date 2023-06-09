@@ -1,7 +1,7 @@
 <template>
     <h2>Connexion</h2>
 
-    <Form @submit="toLogin" :validation-schema="schema">
+    <Form @submit="login" :validation-schema="schema">
 
         Email :
         <Field name="email" v-model="user.email" />
@@ -18,22 +18,30 @@
     
 
 <script setup>
-import axios from 'axios'
+import { accountService } from '@/_services'
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { Field, Form, ErrorMessage } from 'vee-validate'
 
 const router = useRouter()
+
 const user = reactive({
     email: '',
     password: ''
 })
 
-const toLogin = () => {
-    axios.post('http://localhost:8080/auth/login', user)
+const login = () => {
+    accountService.login(user)
         .then((res) => {
-            localStorage.setItem("user", res.data)
-            router.push('/articles')
+           
+            if(res.data.role == "admin") {
+                router.push('/admin')
+            }
+            router.push('/')
+            
+            // console.log(res.data);
+            // console.log(res.data.role);
+            accountService.saveToken(res.data.token)
         })
         .catch((error) => {
             if(error.data !=user.password) {

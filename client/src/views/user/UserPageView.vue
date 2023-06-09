@@ -10,10 +10,6 @@ import PublicNav from'../../components/PublicNav.vue'
 export default {
     components: {
         PublicNav
-    },
-
-    methods() {
-        
     }
 }
 </script>
