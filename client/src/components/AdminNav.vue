@@ -1,5 +1,5 @@
 <template >
-  <nav>
+  <nav class="admin-nav">
     <router-link to="/add-article"> Ajouter un article</router-link> |
     <router-link to="/users"> Listes des utilisateurs</router-link> |
     <router-link to="/"> Retour</router-link> |
@@ -14,4 +14,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.admin-nav {
+  border: 3px red solid
+}
+</style>

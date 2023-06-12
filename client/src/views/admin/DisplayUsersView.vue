@@ -8,7 +8,7 @@
             <th>EMAIL</th>
 
         </tr>
-        <tr v-for=" user in users">
+        <tr v-for=" user in users" :key="user.id">
             <td> {{ user.name }} </td>
             <td> {{ user.lastname }} </td>
             <td> {{ user.username }} </td>
@@ -34,6 +34,8 @@ export default {
 }
 </script>
 <style scoped>
-table, th, td {
-  border:1px solid black;
+table,
+th,
+td {
+    border: 1px solid black;
 }</style>

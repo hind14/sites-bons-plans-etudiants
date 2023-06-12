@@ -13,6 +13,9 @@ import SignupView from '../views/auth/SignupView.vue'
 import LoginView from '../views/auth/LoginView.vue'
 import { authGuard } from '../_helpers/auth-guard'
 
+
+import UserPageView from '../views/UserPageView.vue'
+
 import NotFoundView from '../views/NotFoundView.vue'
 
 const routes = [
@@ -35,6 +38,11 @@ const routes = [
       { path: '/articles', name: 'display-all-articles', component: DisplayArticlesView },
       { path: '/articles/:id', name: 'display-one-article', component: DisplayOneArticleView },
     ]
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: UserPageView,
   },
   {
     path: '/admin',

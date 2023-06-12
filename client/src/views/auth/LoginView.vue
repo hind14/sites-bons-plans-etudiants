@@ -27,21 +27,23 @@ const router = useRouter()
 
 const user = reactive({
     email: '',
-    password: ''
+    password: '',
 })
 
 const login = () => {
     accountService.login(user)
         .then((res) => {
-           
-            if(res.data.role == "admin") {
-                router.push('/admin')
-            }
-            router.push('/')
-            
-            // console.log(res.data);
-            // console.log(res.data.role);
             accountService.saveToken(res.data.token)
+            if(res.data.role == 'admin') {
+                console.log("ADMIN");
+                router.push('/admin')
+            } else {
+                router.push('/user')
+            }
+           
+             console.log(res.data);
+             console.log(res.data.role);
+        
         })
         .catch((error) => {
             if(error.data !=user.password) {

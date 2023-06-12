@@ -32,7 +32,7 @@
 </template>
   
 <script>
-import axios from 'axios'
+import http from '../../_services/http.service'
 
 export default {
   data() {
@@ -53,7 +53,7 @@ export default {
         content: this.article.content,
         category: this.article.category,
       }
-      axios.create("http://localhost:8080/articles", data)
+      http.post("/articles", data)
         .then(() => {
           this.submitted = true;
         })
