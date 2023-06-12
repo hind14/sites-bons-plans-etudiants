@@ -4,8 +4,11 @@ module.exports = app => {
     const comment = require('../controllers/comment.controller.js')
     const auth = require('../middleware/auth.js')
 
-    router.post('/:articleId/com', auth.userAuth, comment.createComment)
+    // Public route
     router.get('/:articleId/com', comment.getAllComments)
+
+    //User routes
+    router.post('/:articleId/com', auth.userAuth, comment.createComment)
     router.put('/:articleId/com/:id', auth.userAuth, comment.updateComment)
     router.delete('/:articleId/com/:id', auth.userAuth, auth.adminAuth, comment.deleteComment)
 

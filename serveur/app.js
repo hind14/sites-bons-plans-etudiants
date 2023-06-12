@@ -34,10 +34,10 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to my application." })
 })
 
-db.sequelize.sync({force: false})
+db.sequelize.sync({ force: false })
   .then(() => {
     console.log("Resync Db.")
-   
+
   })
   .catch((err) => {
     console.log("Failed to sync db: " + err.message)

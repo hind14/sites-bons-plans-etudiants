@@ -12,11 +12,11 @@ exports.createComment = async (req, res, next) => {
 
   if (comment.userId == null) {
     return res.status(400).json({ error: "Pas d'utilisateur" })
-  } 
+  }
   if (comment.articleId == null) {
     return res.status(400).json({ error: "Pas d'article selectionné" })
-  } 
-  if(comment.commentContent == "") {
+  }
+  if (comment.commentContent == "") {
     return res.status(400).json({ error: "Impossible d'enregistrer le comentaire" })
   }
   Comment.create(comment)

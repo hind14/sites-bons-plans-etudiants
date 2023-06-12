@@ -7,16 +7,12 @@ exports.createArticle = async (req, res, next) => {
   const article = {
     title: req.body.title,
     content: req.body.content,
-    category: req.body.category,
-   // userId: req.body.userId
+    category: req.body.category
   }
 
-  // if (article.userId == null) {
-  //   return res.status(400).json({ error: "Pas d'utilisateur..." })
-  // } 
   if (article.title == null ||
-      article.content == null ||
-      article.category == null) {
+    article.content == null ||
+    article.category == null) {
     return res.status(400).json({ error: "Merci de remplir tous les champs." })
   }
   Article.create(article)
@@ -54,51 +50,39 @@ exports.getArticleById = async (req, res, ext) => {
 }
 
 exports.updateArticle = async (req, res, ext) => {
- // const userId = req.params.userId
   const id = req.params.id
 
   if (req.body.title == null || req.body.content == null || req.body.category == null) {
     return res.status(400).json({ error: "Merci de remplir tous les champs." })
   }
 
-  //if (Article.userId === userId) {
-    Article.update(
-      {
-        title: req.body.title,
-        content: req.body.content,
-        category: req.body.category
-      },
-      { where: { id: id } }
-    )
-      .then(() => {
-        res.status(200).json({ message: 'article modifié !' })
-      })
-      .catch((error) => {
-        res.status(404).json({ error: "Erreur lors de la modification." })
-      })
-  //}
-  // else {
-  //   console.log(error)
-  // }
+  Article.update(
+    {
+      title: req.body.title,
+      content: req.body.content,
+      category: req.body.category
+    },
+    { where: { id: id } }
+  )
+    .then(() => {
+      res.status(200).json({ message: 'article modifié !' })
+    })
+    .catch((error) => {
+      res.status(404).json({ error: "Erreur lors de la modification." })
+    })
 }
 
 
 
 exports.deleteArticle = async (req, res, next) => {
 
- // const userId = req.params.userId
   const id = req.params.id
 
- // if (Article.userId === userId) {
-    Article.destroy({ where: { id: id } })
-      .then((article) => {
-        res.status(200).json(article)
-      })
-      .catch((error) => {
-        res.status(404).json({ error: "Suppression impossible" })
-      })
-  // }
-  // else {
-  //   console.log(error)
-  // }
+  Article.destroy({ where: { id: id } })
+    .then((article) => {
+      res.status(200).json(article)
+    })
+    .catch((error) => {
+      res.status(404).json({ error: "Suppression impossible" })
+    })
 }

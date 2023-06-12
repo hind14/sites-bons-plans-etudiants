@@ -79,7 +79,7 @@ exports.getUser = (req, res, next) => {
 exports.getListOfUsers = (req, res, next) => {
   User.findAll()
     .then(user => {
-        res.status(200).json(user) 
+      res.status(200).json(user)
     })
     .catch(() => res.status(403).json({ error: 'Erreur lors de la récupération des utilisateurs' }))
 
