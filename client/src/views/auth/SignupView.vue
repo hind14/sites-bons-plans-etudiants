@@ -69,7 +69,7 @@ const user = reactive({
 
 const toSignUp = () => {
   axios
-    .post('http://localhost:8080/auth/signup', user)
+    .post('http://localhost:3000/auth/signup', user)
     .then(() => {
       router.push({ name: 'login'})
     })

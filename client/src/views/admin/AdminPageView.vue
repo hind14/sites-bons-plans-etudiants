@@ -2,16 +2,18 @@
     <div class="admin-page">
             admin page
        <AdminNav/>
-        <router-view />
+       <PublicPageView/>
     </div>
 </template>
 
 <script>
 import AdminNav from'../../components/AdminNav.vue'
+import PublicPageView from '../public/PublicPageView.vue'
 export default {
     components: {
-        AdminNav
-    }
+    AdminNav,
+    PublicPageView
+}
 }
 </script>
 

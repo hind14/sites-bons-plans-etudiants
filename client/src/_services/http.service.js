@@ -3,7 +3,7 @@ import { accountService } from './account.service'
 import router from '@/router'
 
 const http = axios.create({
-    baseURL: 'http://localhost:8080',
+    baseURL: 'http://localhost:3000',
 })
 
 /** cas où le token expire */

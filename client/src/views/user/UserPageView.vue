@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import PublicPageView from './public/PublicPageView.vue';
+import PublicPageView from '../public/PublicPageView.vue';
 export default {
     components: {
         PublicPageView

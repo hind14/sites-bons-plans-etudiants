@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import http from '../../_services/http.service'
 
 export default {
     data(){
@@ -23,7 +23,7 @@ export default {
         }
     },
     mounted() {
-        axios.get("http://localhost:8080/articles/all")
+        http.get("/articles/all")
         .then(response => this.articles = response.data)
         .catch(err => this.erreur = err)
     },
