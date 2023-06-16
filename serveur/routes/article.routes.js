@@ -10,12 +10,9 @@ module.exports = app => {
     router.get('/:id', article.getArticleById)
 
     // Admin routes
-    router.post('/', auth.adminAuth, multer,  article.createArticle)
-    router.put('/:id', auth.adminAuth, article.updateArticle)
-    router.delete('/:id', auth.adminAuth, article.deleteArticle)
-
-
-
+    router.post('/', auth.adminAuth, multer, article.createArticle)
+    router.put('/:id', auth.adminAuth, multer, article.updateArticle)
+    router.delete('/:id', auth.adminAuth, multer, article.deleteArticle)
 
     app.use('/articles', router)
 
