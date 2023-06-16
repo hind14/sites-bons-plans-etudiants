@@ -57,13 +57,13 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
+// router.beforeEach((to, from, next) => {
 
-  if (to.matched[0].name == 'admin') {
-    authGuard()
-  }
-  next()
-})
+//   if (to.matched[0].name == 'admin') {
+//     authGuard()
+//   }
+//   next()
+// })
 
 
 

@@ -3,6 +3,7 @@
     <div id="article-container">
       {{ article.title }}
       <div id="article-content">{{ article.content }}</div>
+      <img :src="article.image"/> 
       <button @click="updateArticle">Modifier</button> 
         <button @click="deleteArticle">Supprimer</button> 
     </div>

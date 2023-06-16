@@ -1,22 +1,19 @@
 const db = require("../models")
 const Article = db.article
 const Comment = db.comment
-const User = db.user
+const fs = require('fs')
 
 exports.createArticle = async (req, res, next) => {
   const article = {
     title: req.body.title,
     content: req.body.content,
+    image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     category: req.body.category
   }
 
-  if (article.title == null ||
-    article.content == null ||
-    article.category == null) {
-    return res.status(400).json({ error: "Merci de remplir tous les champs." })
-  }
+  
   Article.create(article)
-    .then(() => res.status(201).json({ message: 'article enregistré !' }))
+    .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
     .catch(error => res.status(400).json({ error }))
 }
 

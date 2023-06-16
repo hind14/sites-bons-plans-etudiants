@@ -3,6 +3,7 @@ const bodyParser = require("body-parser")
 const cors = require("cors")
 require('dotenv').config()
 const db = require("./models")
+const path = require('path')
 
 const app = express()
 
@@ -24,6 +25,8 @@ app.use((req, res, next) => {
 require("./routes/user.routes")(app)
 require("./routes/article.routes")(app)
 require("./routes/comment.routes")(app)
+
+app.use('/images', express.static(path.join(__dirname, 'images')))
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {

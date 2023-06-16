@@ -3,7 +3,8 @@
     <ul>
         <li v-for="article in articles" :key="article.id ">
             {{  article.title  }}
-            {{ article.content}} 
+            {{ article.content}}
+           <img :src="article.image"/> 
             <router-link :to="{ name: 'display-one-article', params: { id : article.id } }" >
                 Voir l'article
             </router-link>

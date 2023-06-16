@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div> 
         <PublicPageView />
-        <router-view />
+    
     </div>
 </template>
 

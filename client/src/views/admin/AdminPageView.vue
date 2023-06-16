@@ -1,7 +1,7 @@
 <template>
     <div class="admin-page">
             admin page
-       <AdminNav/>
+            <AdminNav/>
        <PublicPageView/>
     </div>
 </template>

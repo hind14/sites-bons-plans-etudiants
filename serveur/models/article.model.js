@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       }
     },
+    image: {
+      type: DataTypes.STRING
+    },
     content: {
       type: DataTypes.TEXT,
       required: true,
