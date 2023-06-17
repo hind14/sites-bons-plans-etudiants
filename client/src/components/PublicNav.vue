@@ -5,17 +5,38 @@
    <div v-if="isConnected">
     <router-link to="/user"> Mon profil</router-link>
    </div>
-   
-    <!--<button @click="logout"> Deconnexion </button> -->
-    <router-link to="/signup"> Inscription </router-link> 
-      <router-link to="/login"> Connexion </router-link>
+
   </nav>
+  <div v-if="isConnected"> 
+    <button @click="logout"> Deconnexion </button>
+  </div>
+  <div v-else>  
+    <router-link to="/signup"> Inscription </router-link> 
+  
+      <router-link to="/login"> Connexion </router-link>
+      </div>
 </template>
 
 <script>
+import { accountService } from '@/_services'
 
 export default {
-
+  data() {
+    return {
+      isConnected: ''
+   
+    }
+  },
+  mounted() {
+    this.isConnected = accountService.isLogged()
+  },
+  methods: {
+    logout() {
+      accountService.logout()
+      this.isConnected = false
+     
+        }
+  }
 }
 </script>
 
