@@ -19,14 +19,21 @@ import http from '../../_services/http.service'
 export default {
     data(){
         return {
-            articles:[], 
+          
+            articles:[
+            ], 
             erreur: "oups"
         }
     },
     mounted() {
         http.get("/articles/all")
-        .then(response => this.articles = response.data)
-        .catch(err => this.erreur = err)
+        .then(response => {
+        console.log(response.data)
+        this.articles = response.data}
+        )
+        .catch(err => {
+            this.erreur = err}
+            )
     },
  }
 </script>

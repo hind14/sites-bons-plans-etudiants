@@ -40,7 +40,7 @@ const login = () => {
                 console.log("ADMIN");
                 router.push('/admin')
             } else {
-                router.push('/user')
+                router.push('/')
             }
 
             console.log(res.data);

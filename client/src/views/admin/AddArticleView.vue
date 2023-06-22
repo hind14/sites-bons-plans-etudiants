@@ -25,8 +25,8 @@
     {{  message }}
     </div>
     <div>
-      <label for="file"> Télécharger le fichier</label>
-      <input type="file" ref="file" @change="selectFile" />
+      <label for="image"> Télécharger ne image</label>
+      <input type="file" ref="image" @change="selectFile" />
     </div>
 
     <button @click="sendArticle" class="btn btn-success">
@@ -38,11 +38,6 @@
     <h4>L'article a été posté !</h4>
     <router-link to="/articles"> Retour à la liste des articles </router-link>
   </div>
-
-
- 
- 
-
 
 </template>
   
@@ -57,7 +52,7 @@ export default {
         title: "",
         content: "",
         category: "",
-        file: ""
+        image: ""
       },
       message: "",
       error: false,
@@ -66,27 +61,27 @@ export default {
   },
   methods: {
     selectFile() {
-      this.article.file = this.$refs.file.files[0]
-      this.error = false
-      this.message =""
+      this.article.image = this.$refs.image.files[0]
+      // this.error = false
+      // this.message =""
     },
 
 
-    sendFile() {
-      const formData = new FormData()
-      formData.append('file', this.file)
+    // sendFile() {
+    //   const formData = new FormData()
+    //   formData.append('image', this.image)
 
-      http.post('/', formData)
-      .then((res) => {
-        this.message = "L'image a été enregistré avec succès"
-        this.file = ""
-        this.error = false
-      })
-      .catch((err) => {
-        this.message = "L'image n'a pas pu être enregistré"
-        this.error = true
-      })
-    },
+    //   http.post('/', formData)
+    //   .then((res) => {
+    //     this.message = "L'image a été enregistré avec succès"
+    //     this.image = ""
+    //     this.error = false
+    //   })
+    //   .catch((err) => {
+    //     this.message = "L'image n'a pas pu être enregistré"
+    //     this.error = true
+    //   })
+    // },
 
 
 
@@ -95,7 +90,7 @@ export default {
      
       const data = {
         title: this.article.title,
-        file: this.article.file,
+        image: this.article.image,
         content: this.article.content,
         category: this.article.category,
       }

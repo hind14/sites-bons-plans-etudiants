@@ -9,5 +9,5 @@ let getUserById = () => {
 }
 
 export const userService = {
-    getAllUsers
+    getAllUsers, getUserById
 }
