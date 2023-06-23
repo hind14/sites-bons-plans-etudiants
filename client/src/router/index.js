@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 //PUBLIC
 import PublicPageView from '../views/public/PublicPageView.vue'
@@ -34,7 +34,7 @@ const routes = [
     ]
   },
   { 
-    path: '/user', name: 'user', component: UserPageView,  
+    path: '/profile', name: 'profile', component: UserPageView,  
   },
   {
     path: '/admin',
@@ -53,7 +53,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(process.env.BASE_URL),
   routes
 })
 

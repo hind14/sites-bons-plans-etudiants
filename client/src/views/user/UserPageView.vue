@@ -1,17 +1,14 @@
 <template>
-    <div> 
+    <div>
         <PublicPageView />
-    
+
     </div>
 </template>
 
-<script>
-import PublicPageView from '../public/PublicPageView.vue';
-export default {
-    components: {
-        PublicPageView
-    },
-}
+<script setup>
+import PublicPageView from '../public/PublicPageView.vue'
+
+
 </script>
 
 <style></style>

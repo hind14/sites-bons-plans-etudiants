@@ -22,8 +22,9 @@ import { accountService } from '@/_services'
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { Field, Form } from 'vee-validate'
+import { useUserStore } from '../../stores/useUserStore'
 
-
+const userStore = useUserStore()
 const router = useRouter()
 
 const user = reactive({
@@ -35,7 +36,6 @@ const user = reactive({
 const login = () => {
     accountService.login(user)
         .then((res) => {
-            accountService.saveToken(res.data.token)
             if (res.data.role == 'admin') {
                 console.log("ADMIN");
                 router.push('/admin')
@@ -43,8 +43,8 @@ const login = () => {
                 router.push('/')
             }
 
-            console.log(res.data);
-            console.log(res.data.role);
+            userStore.user = res.data
+            localStorage.setItem("user", user)
 
         })
         .catch((error) => {

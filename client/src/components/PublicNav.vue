@@ -2,42 +2,34 @@
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/articles">Articles</router-link> |
-   <div v-if="isConnected">
-    <router-link to="/user"> Mon profil</router-link>
-   </div>
+    <div v-if="user != null">
+      <router-link to="/profile"> Mon profil</router-link>
+    </div>
 
   </nav>
-  <div v-if="isConnected"> 
+  <div v-if="user != null">
     <button @click="logout"> Deconnexion </button>
   </div>
-  <div v-else>  
-    <router-link to="/signup"> Inscription </router-link> 
-  
-      <router-link to="/login"> Connexion </router-link>
-      </div>
+  <div v-else>
+    <router-link to="/signup"> Inscription </router-link>
+
+    <router-link to="/login"> Connexion </router-link>
+  </div>
 </template>
 
-<script>
-import { accountService } from '@/_services'
+<script setup>
+import { useUserStore } from '../stores/useUserStore'
+import { computed } from 'vue'
 
-export default {
-  data() {
-    return {
-      isConnected: ''
-   
-    }
-  },
-  mounted() {
-    this.isConnected = accountService.isLogged()
-  },
-  methods: {
-    logout() {
-      accountService.logout()
-      this.isConnected = false
-     
-        }
-  }
+const userStore = useUserStore();
+const user = computed(() => {
+   userStore.user
+ })
+
+const logout = () => {
+  userStore.user = null
 }
+
 </script>
 
 <style></style>
