@@ -1,6 +1,7 @@
 <template>
     <div class="public-page">
         <PublicNav/>
+      
         <router-view />
     </div>
 </template>
@@ -9,10 +10,12 @@
 import PublicNav from'../../components/PublicNav.vue'
 
 
+
 export default {
     components: {
-        PublicNav
-    },
+    PublicNav,
+ 
+},
 
     methods() {
      

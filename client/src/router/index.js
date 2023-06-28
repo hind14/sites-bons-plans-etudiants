@@ -8,7 +8,6 @@ import DisplayOneArticleView from '../views/public/DisplayOneArticleView.vue'
 //AUTH
 import SignupView from '../views/auth/SignupView.vue'
 import LoginView from '../views/auth/LoginView.vue'
-import { authGuard } from '../_helpers/auth-guard'
 
 //ADMIN
 import AdminPageView from '../views/admin/AdminPageView.vue'
@@ -17,6 +16,8 @@ import DisplayUsersView from '../views/admin/DisplayUsersView.vue'
 
 //USER
 import UserPageView from '../views/user/UserPageView.vue'
+import ProfileView from '../views/user/ProfileView.vue'
+import FavoriteArticlesView from '../views/user/FavoriteArticlesView.vue'
 
 import NotFoundView from '../views/NotFoundView.vue'
 
@@ -25,6 +26,7 @@ const routes = [
     path: '/',
     name: 'public',
     component: PublicPageView,
+    meta: { requiresAuth: false },
     children: [
       { path: '/', name: 'home', component: HomeView },
       { path: '/signup', name: 'signup', component: SignupView },
@@ -33,13 +35,21 @@ const routes = [
       { path: '/articles/:id', name: 'display-one-article', component: DisplayOneArticleView },
     ]
   },
-  { 
-    path: '/profile', name: 'profile', component: UserPageView,  
+  {
+    path: '/user/:id',
+    name: 'user',
+    component: UserPageView,
+    meta: { requiresAuth: true },
+    children: [
+      { path: '/profile', name: 'profile', component: ProfileView },
+      { path: '/favorite-articles', name: 'favorite-articles', component: FavoriteArticlesView },
+    ]
   },
   {
     path: '/admin',
     name: 'admin',
     component: AdminPageView,
+    meta: { requiresAuth: true },
     children: [
       { path: '/users', name: 'users', component: DisplayUsersView },
       { path: '/add-article', name: 'add-article', component: AddArticleView },
@@ -57,14 +67,18 @@ const router = createRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
 
-//   if (to.matched[0].name == 'admin') {
-//     authGuard()
-//   }
-//   next()
-// })
+router.beforeEach((to, from) => {
 
-
+  if (to.meta.requiresAuth && !auth.isLoggedIn()) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    return {
+      path: '/login',
+      // save the location we were at to come back later
+      query: { redirect: to.fullPath },
+    }
+  }
+})
 
 export default router

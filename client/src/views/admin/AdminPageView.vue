@@ -5,13 +5,12 @@
     <router-link to="/users"> Listes des utilisateurs</router-link> | 
   </nav>
     </div>
+    <div>Admin page</div>
 </template>
 
 <script>
-import PublicPageView from '../public/PublicPageView.vue'
 export default {
     components: {
-    PublicPageView
 }
 }
 </script>

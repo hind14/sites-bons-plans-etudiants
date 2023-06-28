@@ -3,7 +3,8 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/articles">Articles</router-link> |
     <div v-if="user != null">
-      <router-link to="/profile"> Mon profil</router-link>
+      <router-link to="/user/:id/profile"> Mon profil</router-link>
+      <router-link to="/user/:id/favorite-articles"> Mes artciles favoris</router-link>
     </div>
 
   </nav>
@@ -27,6 +28,7 @@ const user = computed(() => {
  })
 
 const logout = () => {
+  localStorage.removeItem('user')
   userStore.user = null
 }
 

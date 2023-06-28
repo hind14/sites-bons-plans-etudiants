@@ -1,19 +1,32 @@
 import { defineStore } from 'pinia'
-import { accountService, userService } from '@/_services'
 
 export const useUserStore = defineStore('users', {
-    state: () => ({ user: null}),
-    // actions: {
-    //     login() {
-    //         this.user = accountService.login
-    //     },
-    //     logout() {
-    //         this.user = accountService.logout
-    //     },
-    //     getUserfromLogin() {
-    //         this.user = userService.getUserById
-    //     }
-
-    // }
+    state: () => ({ 
+        user: {} ,
+        isConnected : false
+    }),
+    getters: {
+        userConnected(state) {
+            return state.isConnected
+        },
+        getUser(state) {
+            return state.user
+        }
+    },
+    actions: {
+        login() {
+            localStorage.setItem('token', token)
+            let role = token.role
+            this.isConnected = true
+        },
+        isAuthenticated() {
+            localStorage.getItem("token")
+            this.isConnected = true
+        },
+        logout() {
+            localStorage.removeItem('token')
+            this.isConnected = false
+        },
+    } 
 
 })

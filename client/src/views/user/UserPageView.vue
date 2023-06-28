@@ -1,12 +1,12 @@
 <template>
     <div>
-        <PublicPageView />
-
+   
+user page
     </div>
 </template>
 
 <script setup>
-import PublicPageView from '../public/PublicPageView.vue'
+
 
 
 </script>
