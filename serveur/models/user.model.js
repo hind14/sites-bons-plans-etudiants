@@ -1,5 +1,3 @@
-const Role = require('./role.model')
-
 module.exports = (sequelize, DataTypes) => {
 
   const User = sequelize.define("users", {

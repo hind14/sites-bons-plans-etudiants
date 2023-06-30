@@ -10,7 +10,10 @@ module.exports = app => {
     //User routes
     router.post('/:articleId/com', auth.userAuth, comment.createComment)
     router.put('/:articleId/com/:id', auth.userAuth, comment.updateComment)
-    router.delete('/:articleId/com/:id', auth.userAuth, auth.adminAuth, comment.deleteComment)
+    router.delete('/:articleId/com/:id', auth.userAuth, comment.deleteComment)
+
+    //Admin route
+    router.delete('/:articleId/com/:id/admin', auth.adminAuth, comment.deleteComment)
 
     app.use('/articles', router)
 

@@ -22,6 +22,7 @@ app.use((req, res, next) => {
   next()
 })
 
+require("./routes/auth.routes")(app)
 require("./routes/user.routes")(app)
 require("./routes/article.routes")(app)
 require("./routes/comment.routes")(app)
