@@ -5,7 +5,7 @@ module.exports = (app) => {
 
     //Admin route
     router.get('/admin', auth.adminAuth, user.getListOfUsers)
-    router.delete('/admin/:id', auth.adminAuth, user.deleteUser)
+    router.delete('/:id/admin', auth.adminAuth, user.deleteUser)
 
     //User route
     router.get('/:id', auth.userAuth, user.getUser)
