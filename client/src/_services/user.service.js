@@ -12,10 +12,7 @@ let deleteUserById = () => {
     return http.get('/users/:id')
 } 
 
-let deleteUserByAdmin = () => {
-    return http.get('/users/:id/admin')
-} 
 
 export const userService = {
-    getAllUsers, getUserById, deleteUserById, deleteUserByAdmin
+    getAllUsers, getUserById, deleteUserById
 }

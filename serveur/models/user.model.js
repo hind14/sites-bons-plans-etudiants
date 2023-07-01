@@ -24,11 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     age: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       required: true,
       validate: {
         notEmpty: true,
-        isInt: true,
         max: 100,
         min: 15
       }

@@ -16,9 +16,6 @@ let deleteCommentById = () => {
     return http.delete('/articles/:articleId/com/:id')
 }
 
-let deleteCommentByAdmin = () => {
-    return http.delete('/articles/:articleId/com/:id/admin')
-}
 export const commentService = {
-    getAllComments, createComment, updateComment, deleteCommentById, deleteCommentByAdmin
+    getAllComments, createComment, updateComment, deleteCommentById
 }
