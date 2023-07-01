@@ -4,12 +4,14 @@ module.exports = (app) => {
   const auth = require("../middleware/auth.js");
 
     //Admin route
-    router.get('/admin', auth.adminAuth, user.getListOfUsers)
-    router.delete('/:id/admin', auth.adminAuth, user.deleteUser)
+    router.get('/', auth.adminAuth, user.getListOfUsers)
+   
+   
+    router.delete('/:id', auth.ownerOrAdmin, user.deleteUser)
 
     //User route
     router.get('/:id', auth.userAuth, user.getUser)
-    router.delete('/:id', auth.userAuth, user.deleteUser)
+
 
     app.use('/users', router)
 }

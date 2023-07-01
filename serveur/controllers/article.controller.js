@@ -16,7 +16,7 @@ exports.createArticle = async (req, res, next) => {
   }
 
   Article.create(article)
-    .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
+    .then(() => res.status(201).json({ article }))
     .catch(error => res.status(400).json({ error }))
 }
 

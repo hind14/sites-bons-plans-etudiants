@@ -6,7 +6,7 @@ module.exports = app => {
     const multer = require('../middleware/multer.js')
 
     // Public routes
-    router.get('/all', article.getAllArticles)
+    router.get('/', article.getAllArticles)
     router.get('/:id', article.getArticleById)
 
     // Admin routes
