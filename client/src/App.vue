@@ -3,11 +3,20 @@
 </template>
 
 <script>
+import { useUserStore } from '@/stores/useUserStore';
 
 export default {
-
+  data() {
+    return {
+      userStore: useUserStore()
+    }
+  },
+  mounted() {
+    this.userStore.lastConnectionAvailable()
+  },
 }
 </script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

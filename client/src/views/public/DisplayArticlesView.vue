@@ -1,16 +1,19 @@
 <template>
-     <h2> Liste de articles </h2>
+    <div id="articles">
+        <h2> Liste de articles </h2>
     <ul>
         <li v-for="article in articles" :key="article.id ">
             {{  article.title  }}
             {{ article.content}}
-           <img :src="article.image"/> 
+           <img :src="article.image"> 
             <router-link :to="{ name: 'display-one-article', params: { id : article.id } }" >
                 Voir l'article
             </router-link>
         </li>
     </ul>
 
+    </div>
+   
 </template>
 
 <script>
@@ -22,13 +25,13 @@ export default {
           
             articles:[
             ], 
+            
             erreur: "oups"
         }
     },
     mounted() {
-        http.get("/articles/all")
+        http.get("/articles")
         .then(response => {
-        console.log(response.data)
         this.articles = response.data}
         )
         .catch(err => {
@@ -37,6 +40,8 @@ export default {
     },
  }
 </script>
-<style>
-    
+<style scoped>
+   #articles {
+    border: 2px rgb(174, 255, 0) solid;
+   } 
 </style>

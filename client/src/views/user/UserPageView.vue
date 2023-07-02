@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="user-page">
    
 user page
     </div>
@@ -8,7 +8,10 @@ user page
 <script setup>
 
 
-
 </script>
 
-<style></style>
+<style scoped>
+#user-page {
+    border: 2px purple solid;
+}
+</style>

@@ -79,4 +79,7 @@ const toSignUp = () => {
 }
 </script>
 
-<style></style>
+<style scoped>
+#signup-form {
+    border: 2px rgb(255, 238, 0) solid;
+}</style>

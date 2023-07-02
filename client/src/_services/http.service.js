@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { accountService } from './account.service'
-import router from '@/router'
+//import router from '@/router'
 
 const http = axios.create({
     baseURL: 'http://localhost:3000',
@@ -17,18 +17,18 @@ http.interceptors.request.use(request => {
 })
 
 /** cas où le token expire */
-http.interceptors.response.use(response => {
+// http.interceptors.response.use(response => {
 
-    return response
+//     return response
 
-}, error => {
+// }, error => {
 
-    if (error.response.status == 401) {
-        accountService.logout()
-        router.push('/login')
-    }
+//     if (error.response.status == 401) {
+//         accountService.logout()
+//         router.push('/login')
+//     }
 
-})
+// })
 
 
 export default http

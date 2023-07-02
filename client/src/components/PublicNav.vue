@@ -1,37 +1,35 @@
 <template >
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/articles">Articles</router-link> |
-    <div v-if="user != null">
-      <router-link to="/user/:id/profile"> Mon profil</router-link>
-      <router-link to="/user/:id/favorite-articles"> Mes artciles favoris</router-link>
-    </div>
+  
+  <nav id="nav">
+
+    <router-link to="/">Accueil</router-link> |
+    <router-link to="/articles">Voir les articles</router-link> |
+   
+    <div v-if="userStore.isConnected">
+      <router-link to="/profile"> Mon profil </router-link>
+      <router-link to="/favorite-articles"> Mes artciles favoris</router-link>
+    <button @click="userStore.logout"> Se deconnecter </button>
+  </div>
+
+  <div v-else>
+    <router-link to="/signup"> S'inscrire </router-link> |
+    <router-link to="/login"> Se connecter </router-link>
+  </div>
 
   </nav>
-  <div v-if="user != null">
-    <button @click="logout"> Deconnexion </button>
-  </div>
-  <div v-else>
-    <router-link to="/signup"> Inscription </router-link>
-
-    <router-link to="/login"> Connexion </router-link>
-  </div>
+  
 </template>
 
 <script setup>
 import { useUserStore } from '../stores/useUserStore'
-import { computed } from 'vue'
 
 const userStore = useUserStore();
-const user = computed(() => {
-   userStore.user
- })
-
-const logout = () => {
-  localStorage.removeItem('user')
-  userStore.user = null
-}
 
 </script>
 
-<style></style>
+<style scoped>
+#nav {
+  border: 2px orange solid;
+  background-color: orange;
+}
+</style>

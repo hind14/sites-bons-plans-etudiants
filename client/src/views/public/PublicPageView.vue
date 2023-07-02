@@ -1,31 +1,34 @@
 <template>
     <div class="public-page">
-        <PublicNav/>
-      
+
+        <PublicNav />
         <router-view />
+        <PulicFooter />
+
     </div>
 </template>
 
 <script>
-import PublicNav from'../../components/PublicNav.vue'
-
+import PublicNav from '../../components/PublicNav.vue'
+import PulicFooter from '../../components/PublicFooter.vue'
 
 
 export default {
     components: {
-    PublicNav,
- 
-},
-
-    methods() {
-     
-       
+        PublicNav,
+        PulicFooter,
+    },
+    data() {
+        return {
+            storage: localStorage.getItem("token")
+        }
     }
 }
 </script>
 
 <style>
-    .public-page {
-        border: 2px black solid;
-    }
+.public-page {
+    border: 2px blue solid;
+    padding: 2px;
+}
 </style>
