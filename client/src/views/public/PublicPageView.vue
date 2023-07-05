@@ -17,11 +17,6 @@ export default {
     components: {
         PublicNav,
         PulicFooter,
-    },
-    data() {
-        return {
-            storage: localStorage.getItem("token")
-        }
     }
 }
 </script>

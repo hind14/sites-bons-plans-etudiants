@@ -26,7 +26,6 @@ const routes = [
     path: '/',
     name: 'public',
     component: PublicPageView,
-    // meta: { requiresAuth: false },
     children: [
       { path: '/', name: 'home', component: HomeView },
       { path: '/signup', name: 'signup', component: SignupView },
@@ -36,12 +35,11 @@ const routes = [
     ]
   },
   {
-    path: '/user/:id',
+    path: '/user',
     name: 'user',
     component: UserPageView,
-    // meta: { requiresAuth: true },
     children: [
-      { path: '/profile', name: 'profile', component: ProfileView },
+      { path: '/profil', name: 'profil', component: ProfileView },
       { path: '/favorite-articles', name: 'favorite-articles', component: FavoriteArticlesView },
     ]
   },
@@ -49,7 +47,6 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: AdminPageView,
-    // meta: { requiresAuth: true },
     children: [
       { path: '/users', name: 'users', component: DisplayUsersView },
       { path: '/add-article', name: 'add-article', component: AddArticleView },
@@ -67,18 +64,5 @@ const router = createRouter({
   routes
 })
 
-
-// router.beforeEach((to, from) => {
-
-//   if (to.meta.requiresAuth && !auth.isLoggedIn()) {
-//     // this route requires auth, check if logged in
-//     // if not, redirect to login page.
-//     return {
-//       path: '/login',
-//       // save the location we were at to come back later
-//       query: { redirect: to.fullPath },
-//     }
-//   }
-// })
 
 export default router

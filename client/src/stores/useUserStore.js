@@ -3,17 +3,21 @@ import jwtDecode from 'jwt-decode'
 
 export const useUserStore = defineStore('users', {
     state: () => ({
-        user: {},
+        user: null,
         isConnected: false,
-        role: {},
+        isAdmin: false,
+        role: null,
         userId: 0
     }),
     getters: {
         userConnected(state) {
             return state.isConnected
         },
-        getUser(state) {
-            return state.user
+        getUserId(state) {
+            let token = localStorage.getItem("token")
+            let decodedToken = jwtDecode(token)
+            decodedToken.userId
+            return state.userId
         }
     },
     actions: {
@@ -21,15 +25,18 @@ export const useUserStore = defineStore('users', {
             localStorage.setItem('token', token)
             let decodedToken = jwtDecode(token)
             this.role = decodedToken.role
+            if(this.role == "admin") {
+                this.isAdmin = true
+            }
+            if(this.role == "user"){
+                this.user = true
+            }
             this.isConnected = true
         },
         isAuthenticated() {
             localStorage.getItem("token")
+            this.user = true
             this.isConnected = true
-        },
-        logout() {
-            localStorage.removeItem('token')
-            this.isConnected = false
         },
         lastConnectionAvailable() {
             let token = localStorage.getItem("token");
@@ -38,8 +45,16 @@ export const useUserStore = defineStore('users', {
                 if ((token.exp * 1000) > Date.now()) {
                     this.isConnected = true;
                     this.userId = token.userId;
+                    this.role = token.role
                 }
             }
-        }
+        }, logout() {
+            localStorage.removeItem('token')
+            this.isConnected = false
+            this.isAdmin = false
+            this.role = null
+            this.user = null
+        },
+        
     }
 })

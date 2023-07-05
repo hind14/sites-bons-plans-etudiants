@@ -1,7 +1,7 @@
 import http from "./http.service";
 
 let getAllUsers = () => {
-    return http.get('/users/admin')
+    return http.get('/users')
 }
 
 let getUserById = () => {
@@ -9,7 +9,7 @@ let getUserById = () => {
 }
 
 let deleteUserById = () => {
-    return http.get('/users/:id')
+    return http.delete('/users/:id')
 } 
 
 

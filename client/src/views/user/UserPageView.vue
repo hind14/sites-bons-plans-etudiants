@@ -1,14 +1,27 @@
 <template>
     <div id="user-page">
-   
-user page
+        <PublicNav />
+       <div>user page</div> 
+        <router-view />
+        <PulicFooter />
+
     </div>
 </template>
 
-<script setup>
+
+<script>
+import PublicNav from '../../components/PublicNav.vue'
+import PulicFooter from '../../components/PublicFooter.vue'
 
 
+export default {
+    components: {
+        PublicNav,
+        PulicFooter,
+    }
+}
 </script>
+
 
 <style scoped>
 #user-page {

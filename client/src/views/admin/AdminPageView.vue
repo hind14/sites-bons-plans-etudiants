@@ -1,20 +1,23 @@
 <template>
     <div class="admin-page">
-        <nav class="admin-nav">
-    <router-link to="/add-article"> Ajouter un article</router-link> |
-    <router-link to="/users"> Listes des utilisateurs</router-link> | 
-  </nav>
-    </div>
+        <PublicNav />
     <div>Admin page</div>
+    <router-view />
+    <PulicFooter />
+    </div>
 </template>
 
-<script>
-export default {
-    components: {
-}
-}
+<script setup>
+import PublicNav from '@/components/PublicNav.vue'
+import PulicFooter from '@/components/PublicFooter.vue'
+import { useUserStore } from '@/stores/useUserStore'
+const userStore = useUserStore()
+
+
 </script>
 
 <style>
-  
+  .admin-page {
+    border: 3px blueviolet solid;
+  }
 </style>

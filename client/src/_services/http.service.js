@@ -16,19 +16,5 @@ http.interceptors.request.use(request => {
     return request
 })
 
-/** cas où le token expire */
-// http.interceptors.response.use(response => {
-
-//     return response
-
-// }, error => {
-
-//     if (error.response.status == 401) {
-//         accountService.logout()
-//         router.push('/login')
-//     }
-
-// })
-
 
 export default http
