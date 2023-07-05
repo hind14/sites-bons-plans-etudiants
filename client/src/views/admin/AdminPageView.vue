@@ -1,10 +1,9 @@
 <template>
-    <div class="admin-page">
-        <PublicNav />
-    <div>Admin page</div>
+  <div class="admin-page">
+    <PublicNav />
     <router-view />
     <PulicFooter />
-    </div>
+  </div>
 </template>
 
 <script setup>
@@ -17,7 +16,7 @@ const userStore = useUserStore()
 </script>
 
 <style>
-  .admin-page {
-    border: 3px blueviolet solid;
-  }
+.admin-page {
+  border: 3px blueviolet solid;
+}
 </style>

@@ -44,8 +44,9 @@ export const useUserStore = defineStore('users', {
                 token = jwtDecode(token);
                 if ((token.exp * 1000) > Date.now()) {
                     this.isConnected = true;
-                    this.userId = token.userId;
+                    this.userId = token.userId
                     this.role = token.role
+                    this.isAdmin = true
                 }
             }
         }, logout() {

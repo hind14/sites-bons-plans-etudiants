@@ -9,7 +9,7 @@ let getUserById = () => {
 }
 
 let deleteUserById = () => {
-    return http.delete('/users/:id')
+    return http.delete(`/users/${id}`)
 } 
 
 
