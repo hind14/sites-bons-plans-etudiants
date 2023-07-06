@@ -6,9 +6,12 @@
             {{  article.title  }}
             {{ article.content}}
            <img :src="article.image"> 
+
+          <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
             <router-link :to="{ name: 'display-one-article', params: { id : article.id } }" >
                 Voir l'article
             </router-link>
+          </button> 
         </li>
     </ul>
 

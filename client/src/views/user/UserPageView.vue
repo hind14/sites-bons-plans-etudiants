@@ -1,7 +1,6 @@
 <template>
     <div id="user-page">
         <PublicNav />
-       <div>user page</div> 
         <router-view />
         <PulicFooter />
 

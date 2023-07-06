@@ -1,39 +1,101 @@
 <template>
-  <h2>N'attendez plus, inscrivez-vous !</h2>
-
-  <Form @submit="toSignUp" :validation-schema="schema">
-    Prénom : 
-    <Field name="name"  v-model="user.name" /> 
-    <ErrorMessage name="name" />
-
-    Nom : 
-    <Field name="lastname"   v-model="user.lastname"/>
-    <ErrorMessage name="lastname" />
-
-    Username : 
-    <Field name="username"  v-model="user.username"/> 
-    <ErrorMessage name="username" />
-
-    Age : 
-    <Field name="age"   v-model="user.age"/>
-    <ErrorMessage name="age" />
-
-    Email : 
-    <Field name="email"  v-model="user.email"/> 
-    <ErrorMessage name="email" />
-
-    Mot de passe :
-    <Field name="password" type="password" v-model="user.password"/> 
-    <ErrorMessage name="password" />
-
-    <button>S'inscrire</button>
-  </Form>
-
   <div>
-    Déja membre?
-    <router-link to="/login">Connectez-vous !</router-link>
+    <h2>N'attendez plus, inscrivez-vous !</h2>
+
+    <Form @submit="toSignUp" :validation-schema="schema" class="w-full max-w-lg">
+
+      <div class="flex flex-wrap -mx-3 mb-6">
+
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+            Prénom
+          </label>
+
+          <Field v-model="user.name" 
+          name="name" type="text" 
+          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+          id="grid-first-name" />
+          <ErrorMessage name="name" class="text-red-500 text-xs italic" />
+        </div>
+
+        <div class="w-full md:w-1/2 px-3">
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+            Nom
+          </label>
+
+          <Field  v-model="user.lastname" 
+          name="lastname" type="text"
+          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          id="grid-last-name"/>
+          <ErrorMessage name="lastname"  class="text-red-500 text-xs italic" />
+        </div>
+
+      </div>
+
+      <div class="flex flex-wrap -mx-3 mb-6">
+
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-username">
+            Username
+          </label>
+          <Field v-model="user.username" 
+           name="username" type="text"
+           class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          id="grid-username"/>
+      <ErrorMessage name="username" class="text-red-500 text-xs italic" />
+        </div>
+
+        <div class="w-full md:w-1/2 px-3">
+          <label  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-email">
+            Email
+          </label>
+          <Field  v-model="user.email" 
+          name="email" type="email" 
+          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          id="grid-email"/>
+      <ErrorMessage name="email" class="text-red-500 text-xs italic"/>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full px-3">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-age">
+       Age
+      </label>
+      <Field  v-model="user.age" name="age" type="number"
+      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-age"/>
+      <ErrorMessage name="age" class="text-red-500 text-xs italic"/>
+    </div>
   </div>
 
+
+    <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full px-3">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+        Mot de passe
+      </label>
+      
+      <Field  v-model="user.password"
+       name="password" type="password"
+      class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" placeholder="**********"/>
+      <p class="text-gray-600 text-xs italic">Le mot de passe doit contenir au moins une majuscule et 2 nombres. Longeur minimum de 8 caractères</p>
+      <ErrorMessage name="password" class="text-red-500 text-xs italic"/>
+    </div>
+  </div>
+  
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">S'inscrire</button>
+    </Form>
+
+    <div>
+      Déja membre?
+      <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <router-link to="/login">Connectez-vous !</router-link>
+      </button>
+      
+    </div>
+
+  </div>
 </template>
 
 <script setup>
@@ -53,25 +115,25 @@ const schema = yup.object({
   age: yup.number().required("Ce champ est obligatoire").typeError("Veuillez indiquer uniqement des nombres"),
   email: yup.string().required("Ce champ est obligatoire").email("L'email n'est pas correct").trim(),
   password: yup.string().required("oups vous n'avez rien écrit")
-  .minNumbers(2, 'Le mot de passe doit contenir  au moins deux chiffres')
-  .max(20).typeError("Le mot de passe doit contenirune majuscule").trim("oups vous n'avez rien écrit"),
+    .minNumbers(2, 'Le mot de passe doit contenir  au moins deux chiffres')
+    .max(20).typeError("Le mot de passe doit contenirune majuscule").trim("oups vous n'avez rien écrit"),
 })
 
 const router = useRouter()
-const user = reactive({ 
-      name: '',
-      lastname: '',
-      username: '',
-      age: '',
-      email: '',
-      password: ''
-    })
+const user = reactive({
+  name: '',
+  lastname: '',
+  username: '',
+  age: '',
+  email: '',
+  password: ''
+})
 
 const toSignUp = () => {
   axios
     .post('http://localhost:3000/auth/signup', user)
     .then(() => {
-      router.push({ name: 'login'})
+      router.push({ name: 'login' })
     })
     .catch((error) => {
       console.log("errr", error)
@@ -81,5 +143,5 @@ const toSignUp = () => {
 
 <style scoped>
 #signup-form {
-    border: 2px rgb(255, 238, 0) solid;
+  border: 2px rgb(255, 238, 0) solid;
 }</style>

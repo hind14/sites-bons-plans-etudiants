@@ -3,7 +3,6 @@ import jwtDecode from 'jwt-decode'
 
 export const useUserStore = defineStore('users', {
     state: () => ({
-        user: null,
         isConnected: false,
         isAdmin: false,
         role: null,
@@ -28,14 +27,11 @@ export const useUserStore = defineStore('users', {
             if(this.role == "admin") {
                 this.isAdmin = true
             }
-            if(this.role == "user"){
-                this.user = true
-            }
             this.isConnected = true
+            this.userId = decodedToken.userId
         },
         isAuthenticated() {
             localStorage.getItem("token")
-            this.user = true
             this.isConnected = true
         },
         lastConnectionAvailable() {
@@ -43,10 +39,13 @@ export const useUserStore = defineStore('users', {
             if (token) {
                 token = jwtDecode(token);
                 if ((token.exp * 1000) > Date.now()) {
-                    this.isConnected = true;
+                    this.isConnected = true
                     this.userId = token.userId
                     this.role = token.role
-                    this.isAdmin = true
+
+                    if(token.role == "admin") {
+                        this.isAdmin = true
+                    }
                 }
             }
         }, logout() {
@@ -54,7 +53,7 @@ export const useUserStore = defineStore('users', {
             this.isConnected = false
             this.isAdmin = false
             this.role = null
-            this.user = null
+            this.userId = 0
         },
         
     }

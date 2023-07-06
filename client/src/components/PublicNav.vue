@@ -11,10 +11,9 @@
 
     <div v-if="userStore.isConnected">
       <router-link :to="{
-        name: 'profil',
-        params: { id: userStore.userId }
+        name: 'profil'
       }"> Mon profil </router-link>
-      <router-link to="/favorite-articles"> Mes artciles favoris</router-link>
+      <router-link to="/favorite-articles"> Mes articles favoris</router-link>
       <button @click="userStore.logout" ref="navToUpdate"> Se deconnecter </button>
     </div>
 

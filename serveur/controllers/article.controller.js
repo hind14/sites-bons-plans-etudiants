@@ -15,6 +15,10 @@ exports.createArticle = async (req, res, next) => {
     return res.status(400).json({ error: "Merci de remplir tous les champs." })
   }
 
+  if(req.file == undefined) {
+    return res.send('Il faut ajouter une image !');
+  }
+
   Article.create(article)
     .then(() => res.status(201).json({ article }))
     .catch(error => res.status(400).json({ error }))
