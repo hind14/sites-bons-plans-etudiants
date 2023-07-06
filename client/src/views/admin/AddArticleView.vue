@@ -1,5 +1,5 @@
 <template>
-  <form @submit="sendForm" enctype="multipart/form-data">
+  <form @submit.prevent="sendArticle" enctype="multipart/form-data">
     <div>
       <label for="title">Titre</label>
       <input required="true" type="text" id="title" v-model="article.title" name="title" />
@@ -48,10 +48,6 @@ export default {
   data() {
     return {
       article: {
-        id: null,
-        title: "",
-        content: "",
-        category: ""
       },
       image: ""
       // message: "",
@@ -65,18 +61,13 @@ export default {
     },
     sendArticle() {
       const formData = new FormData()
-     
-      const data = {
-        title: this.article.title,
-        content: this.article.content,
-        category: this.article.category,
-      }
+      
+     // formData.append('article',  new Blob([JSON.stringify(this.article)],  {type: "application/json"}))
+      formData.append('article',  JSON.stringify(this.article))
 
-      formData.append('data', this.image)
+      formData.append('image', this.image)
 
-      const dataToSend = {data, formData}
-
-      http.post("/articles", dataToSend)
+      http.post("/articles", formData)
         .then((res) => {
           console.log( res , "okkkkkk ")
          this.$router.push('/articles')

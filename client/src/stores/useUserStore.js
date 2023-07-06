@@ -55,6 +55,10 @@ export const useUserStore = defineStore('users', {
             this.role = null
             this.userId = 0
         },
-        
+        deleteUser()
+         {
+            localStorage.removeItem('token')
+            this.isConnected = false
+         }
     }
 })

@@ -7,6 +7,7 @@
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" v-if="usersStore.isAdmin" @click="updateArticle">Modifier</button>  
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" v-if="usersStore.isAdmin" @click="deleteArticle">Supprimer</button>
     </div>
+    <Comment/>
   </div>
 </template>
 
@@ -14,52 +15,48 @@
 import { useUserStore } from '@/stores/useUserStore'
 import http from '../../_services/http.service'
 import { mapStores } from 'pinia'
+import Comment from '@/components/Comment.vue'
 
 export default {
-
-  data() {
-    return {
-      article: {},
-      comments: [],
-      comment: {
-        content: ""
-      },
-    }
-  },
-  computed: {
-    ...mapStores(useUserStore)
-  },
-  methods: {
-    updateArticle() {
-      http.put(`/articles/${this.article.id}`)
-        .then(() => {
-          console.log("update");
-        })
-        .catch((error) => {
-          console.log("error")
-        })
+    data() {
+        return {
+            article: {},
+        };
     },
-    deleteArticle() {
-      http.delete(`/articles/${this.article.id}`)
-        .then(() => {
-          this.$router.push({ name: "display-all-articles" });
+    computed: {
+        ...mapStores(useUserStore)
+    },
+    methods: {
+        updateArticle() {
+            http.put(`/articles/${this.article.id}`)
+                .then(() => {
+                console.log("update");
+            })
+                .catch((error) => {
+                console.log("error");
+            });
+        },
+        deleteArticle() {
+            http.delete(`/articles/${this.article.id}`)
+                .then(() => {
+                this.$router.push({ name: "display-all-articles" });
+            })
+                .catch((error) => {
+                console.log(error);
+            });
+        }
+    },
+    mounted() {
+        const id = this.$route.params.id;
+        http.get(`/articles/${id}`)
+            .then((res) => {
+            this.article = res.data;
         })
-        .catch((error) => {
-          console.log(error)
-        })
-    }
-  },
-
-  mounted() {
-    const id = this.$route.params.id
-    http.get(`/articles/${id}`)
-      .then((res) => {
-        this.article = res.data;
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
+            .catch((error) => {
+            console.log(error);
+        });
+    },
+    components: { Comment }
 }
 
 </script>

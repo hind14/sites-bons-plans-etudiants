@@ -4,23 +4,16 @@ const Comment = db.comment
 const fs = require('fs')
 
 exports.createArticle = async (req, res, next) => {
-  const article = {
-    title: req.body.title,
-    content: req.body.content,
-    image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-    category: req.body.category
-  }
+  const article =  JSON.parse(req.body.article)
 
-  if (req.body.title == null || req.body.content == null || req.body.category == null) {
+  article.image =  `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+ 
+  if (article.title == null || article.content == null || article.category == null) {
     return res.status(400).json({ error: "Merci de remplir tous les champs." })
   }
 
-  if(req.file == undefined) {
-    return res.send('Il faut ajouter une image !');
-  }
-
   Article.create(article)
-    .then(() => res.status(201).json({ article }))
+    .then(() => res.status(201).json( article ))
     .catch(error => res.status(400).json({ error }))
 }
 

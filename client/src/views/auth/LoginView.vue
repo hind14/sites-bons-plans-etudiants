@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full max-w-xs">
+  <div class="grid grid-cols justify-items-center gap-4 content-center">
     <h2>Connexion</h2>
 
 <Form @submit="login" :validation-schema="schema" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
