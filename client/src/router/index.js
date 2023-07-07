@@ -20,6 +20,7 @@ import ProfileView from '../views/user/ProfileView.vue'
 import FavoriteArticlesView from '../views/user/FavoriteArticlesView.vue'
 
 import NotFoundView from '../views/NotFoundView.vue'
+import { useUserStore } from '@/stores/useUserStore'
 
 const routes = [
   {
@@ -38,6 +39,13 @@ const routes = [
     path: '/user',
     name: 'user',
     component: UserPageView,
+    beforeEnter: (to, from, next) => {
+      const usersStore = useUserStore()
+      if(!usersStore.isConnected) {
+        router.push('/login')
+      }
+      next() 
+    },
     children: [
       { path: '/profil', name: 'profil', component: ProfileView },
       { path: '/favorite-articles', name: 'favorite-articles', component: FavoriteArticlesView },
@@ -47,6 +55,13 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: AdminPageView,
+    beforeEnter: (to, from, next) => {
+      const usersStore = useUserStore()
+      if(!usersStore.isAdmin) {
+        router.push('/')
+      }
+      next() 
+    },
     children: [
       { path: '/users', name: 'users', component: DisplayUsersView },
       { path: '/add-article', name: 'add-article', component: AddArticleView },

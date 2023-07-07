@@ -34,9 +34,6 @@
             </li>
         </ul>
 
-        <!-- <div> com {{ comment.commentContent }}</div>
-    <Comment @send-data="displayComment"/> -->
-
     </div>
 </template>
 
@@ -44,10 +41,8 @@
 import { useUserStore } from '@/stores/useUserStore'
 import http from '../../_services/http.service'
 import { mapStores } from 'pinia'
-// import Comment from '@/components/Comment.vue'
 
 export default {
-    // components: { Comment },
     data() {
         return {
             article: {},
@@ -77,10 +72,6 @@ export default {
                     console.log(error);
                 });
         },
-        // displayComment(value) {
-        //     this.comment = value
-        // }
-
         sendComment() {
             let data = {
                 commentContent: this.comment.commentContent,
@@ -96,7 +87,6 @@ export default {
                     console.log(error);
                 });
         },
-
         updateComment() {
 
         },
