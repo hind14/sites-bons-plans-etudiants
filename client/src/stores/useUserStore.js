@@ -24,7 +24,7 @@ export const useUserStore = defineStore('users', {
             localStorage.setItem('token', token)
             let decodedToken = jwtDecode(token)
             this.role = decodedToken.role
-            if(this.role == "admin") {
+            if (this.role == "admin") {
                 this.isAdmin = true
             }
             this.isConnected = true
@@ -43,7 +43,7 @@ export const useUserStore = defineStore('users', {
                     this.userId = token.userId
                     this.role = token.role
 
-                    if(token.role == "admin") {
+                    if (token.role == "admin") {
                         this.isAdmin = true
                     }
                 }
@@ -55,10 +55,9 @@ export const useUserStore = defineStore('users', {
             this.role = null
             this.userId = 0
         },
-        deleteUser()
-         {
+        deleteUser() {
             localStorage.removeItem('token')
             this.isConnected = false
-         }
+        }
     }
 })

@@ -1,8 +1,8 @@
 <!-- <template >
     <div id="comment-container">
-         <div id="create-comment">
+        <div>
             <div>
-                <textarea id="textarea-comment" type="text" required v-model="comment.content"
+                <textarea id="textarea-comment" type="text" required v-model="comment"
                     placeholder="Ecrivez votre commentaire..." name="content">
           </textarea>
             </div>
@@ -12,16 +12,19 @@
             </button>
         </div>
 
-       
+
         <ul>
             <li v-for="comment in comments" :key="comment.id" id="comment-list">
-                <div>{{ comment.content }}</div>
 
-                 <div v-if="storage.userId === comment.userId || user.isAdmin == true">
-                    <button id="delete-comment" @click="deleteComment(comment)">
-                        Supprimer
-                    </button>
-                </div> 
+                <div>{{ comment }}</div>
+
+                <button @click="modifyComment(comment)">
+                    Modifier
+                </button>
+                <button @click="deleteComment(comment)">
+                    Supprimer
+                </button>
+
             </li>
         </ul>
     </div>
@@ -40,33 +43,31 @@ export default {
     },
     methods: {
         sendComment() {
-
+            this.$emit("sendData", this.comment)
+        },
+        modifyComment() {
+            console.log("modify");
         },
         deleteComment() {
-
+            console.log("delete");
         }
     },
     mounted() {
-            http.get(`articles/${articleId}/com`)
-                .then((res) => {
-                    this.comments = res.data;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+        this.sendComment() 
+            http.get(`articles/${id}/com`)
+            .then((res) => {
+                this.comments = res.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+       
     }
 }
 </script>
+
 <style scoped>
 #comment-container {
     border: 2px palevioletred solid;
 }
 </style> -->
-
-<template> <div id="comment-container">commentaire</div></template>
-
-<style scoped>
-#comment-container {
-    border: 2px palevioletred solid;
-}
-</style>
