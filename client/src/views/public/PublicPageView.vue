@@ -1,5 +1,5 @@
 <template>
-    <div class="public-page">
+    <div id="public-page">
 
         <PublicNav />
         <router-view />
@@ -12,7 +12,6 @@
 import PublicNav from '../../components/PublicNav.vue'
 import PulicFooter from '../../components/PublicFooter.vue'
 
-
 export default {
     components: {
         PublicNav,
@@ -22,8 +21,4 @@ export default {
 </script>
 
 <style>
-.public-page {
-    border: 2px blue solid;
-    padding: 2px;
-}
 </style>

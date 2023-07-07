@@ -1,6 +1,6 @@
 <template >
     <div>
-        <p> FAvorite page</p>
+        <h2> Mes articles favoris</h2>
     </div>
 </template>
 <script>

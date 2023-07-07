@@ -18,6 +18,7 @@ import { mapStores } from 'pinia'
 import Comment from '@/components/Comment.vue'
 
 export default {
+    components: { Comment },
     data() {
         return {
             article: {},
@@ -55,8 +56,7 @@ export default {
             .catch((error) => {
             console.log(error);
         });
-    },
-    components: { Comment }
+    }
 }
 
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <img :src="image"/>
+  <div id="home">
+    <img :src="image" />
     <div> Yaaay ! Enfin un site avec tous les bons plans pour les jeunes et étudiants</div>
     <div> N'attend pas, découvre les infos qui te feront vivre ta best life d'étudiant ! </div>
   </div>
@@ -19,10 +19,4 @@ export default {
 
 </script>
 
-<style scoped>
-.home {
-  border: 2px red solid;
-}
-
-
-</style>
+<style scoped></style>

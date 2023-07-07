@@ -23,8 +23,7 @@
 </template>
 
 <script>
-import { userService } from '@/_services';
-import http from '@/_services/http.service';
+import http from '@/_services/http.service'
 
 export default {
     data() {
@@ -33,15 +32,15 @@ export default {
         }
     },
     mounted() {
-        userService.getAllUsers()
+        http.get("/users")
             .then(response => this.users = response.data)
-            .catch(err => 'interdit')
+             .catch(() => console.log("une erreur est survenue lors de l'affichage des utilisateurs"))
     },
     methods: {
         deleteUser(id, index) {
             http.delete(`/users/${id}`)
             .then(() => this.users.splice(index, 1))
-            .catch(err => console.log("user not deleted"))
+            .catch(() => console.log("Problème lors de la suppression"))
         }
     },
 }

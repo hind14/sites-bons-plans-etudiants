@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols justify-items-center gap-4 content-center">
+  <div v-if="!submited.submited" class="grid grid-cols justify-items-center gap-4 content-center">
     <h2>N'attendez plus, inscrivez-vous !</h2>
 
     <Form @submit="toSignUp" :validation-schema="schema" class="w-full max-w-lg">
@@ -12,7 +12,7 @@
           </label>
 
           <Field v-model="user.name" name="name" type="text"
-          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-name" />
           <ErrorMessage name="name" class="text-red-500 text-xs italic" />
         </div>
@@ -91,9 +91,22 @@
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         <router-link to="/login">Connectez-vous !</router-link>
       </button>
-
     </div>
 
+  </div>
+
+
+  <div v-else>
+    <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+      <div class="flex">
+        <div>
+          <p class="font-bold">Bravo ! Vous êtes maintenant inscrits, bienvenue parmis nous ! </p>
+        </div>
+      </div>
+    </div>
+    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+      <router-link to="/login"> Je me connecte </router-link>
+    </button>
   </div>
 </template>
 
@@ -102,9 +115,8 @@
 import { Field, Form, ErrorMessage } from 'vee-validate'
 import * as yup from 'yup'
 import YupPassword from 'yup-password'
-import axios from 'axios'
 import { reactive } from 'vue'
-import { useRouter } from 'vue-router'
+import http from '@/_services/http.service'
 
 YupPassword(yup)
 const schema = yup.object({
@@ -118,7 +130,8 @@ const schema = yup.object({
     .max(20).typeError("Le mot de passe doit contenirune majuscule").trim("Ce champ esr obligatoire"),
 })
 
-const router = useRouter()
+const submited = reactive({ submited: false })
+
 const user = reactive({
   name: '',
   lastname: '',
@@ -129,13 +142,13 @@ const user = reactive({
 })
 
 const toSignUp = () => {
-  axios
-    .post('http://localhost:3000/auth/signup', user)
+  http
+    .post('/auth/signup', user)
     .then(() => {
-      router.push({ name: 'login' })
+      submited.submited = true
     })
     .catch((error) => {
-      console.log("errr", error)
+      console.log(error, "Inscription impossible, veuillez vérifier les champs")
     })
 }
 </script>

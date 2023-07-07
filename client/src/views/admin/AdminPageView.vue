@@ -9,10 +9,6 @@
 <script setup>
 import PublicNav from '@/components/PublicNav.vue'
 import PulicFooter from '@/components/PublicFooter.vue'
-import { useUserStore } from '@/stores/useUserStore'
-const userStore = useUserStore()
-
-
 </script>
 
 <style>

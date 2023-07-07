@@ -3,7 +3,6 @@
         <PublicNav />
         <router-view />
         <PulicFooter />
-
     </div>
 </template>
 
@@ -22,8 +21,4 @@ export default {
 </script>
 
 
-<style scoped>
-#user-page {
-    border: 2px purple solid;
-}
-</style>
+<style scoped></style>

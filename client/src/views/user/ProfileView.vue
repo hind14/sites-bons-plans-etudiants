@@ -6,6 +6,7 @@
         <button @click="deleteUser"> Supprimer mon compte </button>
     </div>
 </template>
+
 <script>
 import http from '@/_services/http.service'
 import { mapStores } from 'pinia'
@@ -22,27 +23,21 @@ export default {
     },
     methods: {
         deleteUser() {
-            alert("T'es sur??")
 
             http.delete(`/users/${this.usersStore.userId}`)
                 .then(() => {
                     this.usersStore.deleteUser()
-                    this.$router.push({ name: 'login'})
+                    this.$router.push({ name: 'login' })
                 })
                 .catch(err => alert(err))
 
         },
     },
-    mounted(){
-      
+    mounted() {
         http.get(`/users/${this.usersStore.userId}`)
             .then((res) => this.user = res.data.user)
             .catch(err => alert(err))
     }
 }
 </script>
-<style scoped>
-#mon-profil {
-    background-color: aquamarine;
-}
-</style>
+<style scoped></style>

@@ -44,7 +44,7 @@
                   Listes des utilisateurs</router-link>
               </span>
 
-              <span v-if="userStore.isConnected">
+              <span v-if="userStore.isConnected && !userStore.isAdmin">
                 <router-link :to="{
                   name: 'profil'
                 }" class="text-black-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-bold">
@@ -52,9 +52,6 @@
                 <router-link to="/favorite-articles"
                 class="text-black-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-bold"> Mes
                   articles favoris</router-link>
-                <button @click="userStore.logout" ref="navToUpdate"
-                  class="bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                  Se deconnecter </button>
               </span>
 
             </div>
@@ -69,6 +66,11 @@
               class="bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
               <router-link to="/login"> Se connecter </router-link>
             </button>
+          </div>
+          <div v-else>
+            <button @click="userStore.logout" ref="navToUpdate"
+                  class="bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                  Se deconnecter </button>
           </div>
         </div>
 

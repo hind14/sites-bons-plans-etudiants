@@ -21,7 +21,7 @@ exports.signup = (req, res, next) => {
       password: hash
     }
     User.create(user)
-    .then(() => res.status(201).json({ user }))
+    .then(() => res.status(201).json(user))
     .catch(() =>
       res.status(400).json({ error: "Impossible de créer l'utilisateur" })
     )

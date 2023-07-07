@@ -13,7 +13,7 @@ exports.createComment = async (req, res, next) => {
     return res.status(400).json({ error: "Impossible d'enregistrer le comentaire" })
   }
   Comment.create(comment)
-    .then(() => res.status(201).json({ comment }))
+    .then(() => res.status(201).json(comment))
     .catch(() => res.status(400).json({ error: "Problème lors de l'enregistrement" }))
 }
 
@@ -50,9 +50,9 @@ exports.updateComment = async (req, res, ext) => {
         }
       })
       .then(() => {
-        res.status(200).json({ message: 'Commentaire modifié !' })
+        res.status(200).json(Comment)
       })
-      .catch((error) => {
+      .catch(() => {
         res.status(404).json({ error: "Erreur lors de la modification du com." })
       })
   }
