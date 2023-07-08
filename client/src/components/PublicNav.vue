@@ -87,5 +87,8 @@ onUpdated(() => {
 </script>
 
 <style scoped>
-
+#nav {
+  background-color: azure;
+  padding: 5px;
+}
 </style>

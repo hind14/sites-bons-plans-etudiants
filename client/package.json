@@ -16,7 +16,6 @@
     "pinia": "^2.1.4",
     "vee-validate": "^4.9.6",
     "vue": "^3.2.13",
-    "vue-axios": "^3.5.2",
     "vue-router": "^4.0.3",
     "yup": "^1.2.0",
     "yup-password": "^0.2.2"
