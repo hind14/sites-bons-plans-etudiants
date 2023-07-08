@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import image from "../../assets/banner-accueil.jpg"
+import image from "@/assets/banner-accueil.jpg"
 
 export default {
   data: function () {
