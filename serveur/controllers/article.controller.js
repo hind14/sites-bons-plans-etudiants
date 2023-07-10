@@ -49,13 +49,11 @@ exports.getArticleById = async (req, res, ext) => {
 exports.updateArticle = async (req, res, ext) => {
   const id = req.params.id
   const article =  JSON.parse(req.body.article)
+  article.image =  `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
 
-  Article.update(
-   article,
-    { where: { id: id } }
-  )
+  Article.update(article, { where: { id: id } })
     .then(() => {
-      res.status(200).json(article)
+      res.status(201).json(article)
     })
     .catch(() => {
       res.status(404).json({ error: "Erreur lors de la modification." })

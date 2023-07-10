@@ -13,6 +13,7 @@ import LoginView from '../views/auth/LoginView.vue'
 import AdminPageView from '../views/admin/AdminPageView.vue'
 import AddArticleView from '../views/admin/AddArticleView.vue'
 import DisplayUsersView from '../views/admin/DisplayUsersView.vue'
+import ModifyArticleView from '../views/admin/ModifyArticleView.vue'
 
 //USER
 import UserPageView from '../views/user/UserPageView.vue'
@@ -65,6 +66,7 @@ const routes = [
     children: [
       { path: '/users', name: 'users', component: DisplayUsersView },
       { path: '/add-article', name: 'add-article', component: AddArticleView },
+      { path: '/modify-article/:id', name: 'modify-article', component: ModifyArticleView },
     ]
   },
   {

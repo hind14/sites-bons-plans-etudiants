@@ -29,7 +29,7 @@
       <input type="file" :v-on="image" ref="image" @change="selectFile" />
     </div>
 
-    <button
+    <button 
       class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
       Post it !
     </button>
@@ -50,7 +50,7 @@
 </template>
   
 <script>
-import http from '../../_services/http.service'
+import http from '@/_services/http.service'
 
 export default {
   data() {
@@ -78,7 +78,7 @@ export default {
         .catch((error) => {
           console.log(error, "L'envoie de l'article n'a pas pu aboutir")
         })
-    },
+    }
   },
 }
 </script>

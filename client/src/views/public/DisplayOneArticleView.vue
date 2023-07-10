@@ -5,7 +5,7 @@
 
             <img :src="article.image" />
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" v-if="usersStore.isAdmin"
-                @click="updateArticle">Modifier</button>
+                @click="goToUpdateArticle">Modifier</button>
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" v-if="usersStore.isAdmin"
                 @click="deleteArticle">Supprimer</button>
         </div>
@@ -22,15 +22,32 @@
             </div>
 
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="sendComment">
-                Ajouter votre commentaire
+                Ajoutez votre commentaire
             </button>
         </div>
 
         <ul>
-            <li v-for="(comment, index) in comments" :key="comment.id" id="comments-list">
-                {{ comment.commentContent }}
-                <button v-if="usersStore.userId == comment.userId" @click="updateComment(comment.id)"> Modifier </button>
-                <button  v-if="usersStore.isAdmin || usersStore.userId == comment.userId" @click="deleteComment(comment.id, index)"> Supprimer </button>
+            <li v-for="(comment, index) in article.comments" :key="comment.id" id="comments-list"
+                v-bind:class="{ completed: comment.selected }">
+
+                <span  v-if="!comment.edit" @click="set(comment, 'edit', !comment.edit)">
+                    {{ comment.commentContent }}
+                </span>
+
+
+                <button v-if="usersStore.userId == comment.userId" @click="set(comment, 'edit', !comment.edit)" >
+                    <span v-if="!comment.edit">Modifier</span>
+                    <span v-if="comment.edit">Enregistrer</span>
+                </button>
+
+                <div v-if="comment.edit">
+                    <input v-model="comment.commentContent" v-on:keyup.enter="comment.edit = false">
+                </div>
+
+
+
+                <button v-if="usersStore.isAdmin || usersStore.userId == comment.userId"
+                    @click="deleteComment(comment.id, index)"> Supprimer </button>
             </li>
         </ul>
 
@@ -39,7 +56,7 @@
 
 <script>
 import { useUserStore } from '@/stores/useUserStore'
-import http from '../../_services/http.service'
+import http from '@/_services/http.service'
 import { mapStores } from 'pinia'
 
 export default {
@@ -48,20 +65,15 @@ export default {
             article: {},
             comments: [],
             comment: {},
+            modifyComment: false
         };
     },
     computed: {
         ...mapStores(useUserStore)
     },
     methods: {
-        updateArticle() {
-            http.put(`/articles/${this.article.id}`)
-                .then(() => {
-                    console.log("update");
-                })
-                .catch(() => {
-                    console.log("error");
-                });
+        goToUpdateArticle() {
+            this.$router.push({ name: "modify-article"  , params: { id: this.article.id}});
         },
         deleteArticle() {
             http.delete(`/articles/${this.article.id}`)
@@ -74,6 +86,7 @@ export default {
         },
         sendComment() {
             let data = {
+
                 commentContent: this.comment.commentContent,
                 userId: this.usersStore.userId
             }
@@ -87,13 +100,15 @@ export default {
                     console.log(error);
                 });
         },
-        updateComment() {
-
+        updateComment(id) {
+            http.put(`/articles/${this.article.id}/com/${id}`)
+                .then(() => this.modifyComment)
+                .catch(() => console.log("Problème lors de la modification"))
         },
         deleteComment(id, index) {
             http.delete(`/articles/${this.article.id}/com/${id}`)
-            .then(() => this.comments.splice(index, 1))
-            .catch(() => console.log("Problème lors de la suppression"))
+                .then(() => this.comments.splice(index, 1))
+                .catch(() => console.log("Problème lors de la suppression"))
         }
     },
     mounted() {
@@ -101,7 +116,7 @@ export default {
 
         http.get(`/articles/${id}`)
             .then((res) => {
-                this.article = res.data;
+                this.article = res.data
             })
             .catch((error) => {
                 console.log(error);

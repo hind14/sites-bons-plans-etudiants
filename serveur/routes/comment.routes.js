@@ -13,9 +13,6 @@ module.exports = app => {
    
     router.delete('/:articleId/com/:id', auth.ownerOrAdmin, comment.deleteComment)
 
-
-   
-
     app.use('/articles', router)
 
 }

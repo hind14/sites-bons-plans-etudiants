@@ -35,7 +35,7 @@ export const useUserStore = defineStore('users', {
             this.isConnected = true
         },
         lastConnectionAvailable() {
-            let token = localStorage.getItem("token");
+            let token = localStorage.getItem("token")
             if (token) {
                 token = jwtDecode(token);
                 if ((token.exp * 1000) > Date.now()) {
@@ -48,7 +48,8 @@ export const useUserStore = defineStore('users', {
                     }
                 }
             }
-        }, logout() {
+        }, 
+        logout() {
             localStorage.removeItem('token')
             this.isConnected = false
             this.isAdmin = false
