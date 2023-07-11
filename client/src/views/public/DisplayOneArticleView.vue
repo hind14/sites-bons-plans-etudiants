@@ -80,6 +80,7 @@ export default {
             http.post(`/articles/${this.article.id}/com`, data)
                 .then((res) => {
                     data = res.data
+                    this.$router.go()
                 })
                 .catch((error) => {
                     console.log(error);
@@ -87,7 +88,8 @@ export default {
         },
         deleteComment(id, index) {
             http.delete(`/articles/${this.article.id}/com/${id}`)
-                .then(() => this.comments.splice(index, 1))
+                .then(() => {this.comments.splice(index, 1)
+                    this.$router.go()})
                 .catch(() => console.log("Problème lors de la suppression"))
         }
     },
