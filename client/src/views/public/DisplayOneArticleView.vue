@@ -15,39 +15,24 @@
         <!-- Comments-->
 
         <div v-if="usersStore.isConnected">
-            <div>
-                <textarea id="textarea-comment" type="text" required v-model="comment.commentContent"
-                    placeholder="Ecrivez votre commentaire..." name="content">
-          </textarea>
-            </div>
 
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" @click="sendComment">
+            <textarea v-model="comment.commentContent" id="textarea-comment" type="text" required 
+                placeholder="Ecrivez votre commentaire..." name="content">
+          </textarea>
+            <button  @click.prevent="sendComment"  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Ajoutez votre commentaire
             </button>
         </div>
 
         <ul>
-            <li v-for="(comment, index) in article.comments" :key="comment.id" id="comments-list"
-                v-bind:class="{ completed: comment.selected }">
+            <li v-for="(comment, index) in article.comments" :key="comment.id" id="comments-list">
 
-                <span  v-if="!comment.edit" @click="set(comment, 'edit', !comment.edit)">
-                    {{ comment.commentContent }}
-                </span>
-
-
-                <button v-if="usersStore.userId == comment.userId" @click="set(comment, 'edit', !comment.edit)" >
-                    <span v-if="!comment.edit">Modifier</span>
-                    <span v-if="comment.edit">Enregistrer</span>
-                </button>
-
-                <div v-if="comment.edit">
-                    <input v-model="comment.commentContent" v-on:keyup.enter="comment.edit = false">
-                </div>
-
-
-
-                <button v-if="usersStore.isAdmin || usersStore.userId == comment.userId"
-                    @click="deleteComment(comment.id, index)"> Supprimer </button>
+                {{ comment.commentContent }}
+                
+                    <button  v-if="usersStore.isAdmin || usersStore.userId == comment.userId"  @click="deleteComment(comment.id, index)"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Supprimer
+                    </button>
             </li>
         </ul>
 
@@ -64,8 +49,7 @@ export default {
         return {
             article: {},
             comments: [],
-            comment: {},
-            modifyComment: false
+            comment: {}
         };
     },
     computed: {
@@ -73,7 +57,7 @@ export default {
     },
     methods: {
         goToUpdateArticle() {
-            this.$router.push({ name: "modify-article"  , params: { id: this.article.id}});
+            this.$router.push({ name: "modify-article", params: { id: this.article.id } });
         },
         deleteArticle() {
             http.delete(`/articles/${this.article.id}`)
@@ -86,7 +70,6 @@ export default {
         },
         sendComment() {
             let data = {
-
                 commentContent: this.comment.commentContent,
                 userId: this.usersStore.userId
             }
@@ -94,16 +77,10 @@ export default {
             http.post(`/articles/${this.article.id}/com`, data)
                 .then((res) => {
                     data = res.data
-                    this.comments.push(data.commentContent)
                 })
                 .catch((error) => {
                     console.log(error);
                 });
-        },
-        updateComment(id) {
-            http.put(`/articles/${this.article.id}/com/${id}`)
-                .then(() => this.modifyComment)
-                .catch(() => console.log("Problème lors de la modification"))
         },
         deleteComment(id, index) {
             http.delete(`/articles/${this.article.id}/com/${id}`)
@@ -129,6 +106,7 @@ export default {
             .catch((error) => {
                 console.log(error);
             })
+
     }
 }
 

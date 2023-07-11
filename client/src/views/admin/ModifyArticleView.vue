@@ -65,8 +65,7 @@
       return {
         article: {},
         image: "",
-        submited: false,
-        isSelected: false
+        submited: false
       }
     },
     computed: {
