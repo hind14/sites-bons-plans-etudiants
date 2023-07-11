@@ -2,7 +2,7 @@
     <div id="user-page">
         <PublicNav />
         <router-view />
-        <PulicFooter />
+        <span id="footer"><PulicFooter /></span>
     </div>
 </template>
 
@@ -21,4 +21,5 @@ export default {
 </script>
 
 
-<style scoped></style>
+<style scoped>
+</style>

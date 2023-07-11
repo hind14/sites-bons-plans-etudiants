@@ -4,7 +4,7 @@
 
       <div class="relative flex h-16 items-center justify-between">
 
-       <!--<img id="logo" :src="logo" />--> 
+        <div id="logo">  </div>
 
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
 
@@ -45,16 +45,17 @@
 
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <div v-if="!userStore.isConnected">
-            <router-link to="/signup" class="text-gray-300 rounded-md px-3 py-2 text-sm font-medium"> S'inscrire
+            <router-link to="/signup"
+              class="text-indigo-700 rounded-md px-3 py-2 text-sm font-bold hover:text-indigo-300"> S'inscrire
             </router-link>
             <button
-              class="bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+              class="bg-purple-950 text-white font-semibold hover:text-cyan-800 py-2 px-4 border border-purple-950 hover:border-transparent rounded">
               <router-link to="/login"> Se connecter </router-link>
             </button>
           </div>
           <div v-else>
             <button @click="userStore.logout" ref="navToUpdate"
-              class="bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+              class="bg-purple-950 text-white font-semibold hover:text-blue-400 py-2 px-4 border border-blue-500 hover:border-transparent rounded">
               Se deconnecter </button>
           </div>
         </div>
@@ -91,4 +92,11 @@ onUpdated(() => {
   background-color: azure;
   padding: 5px;
 }
-</style>
+
+#logo {
+  background-image: url('@/assets/logo-student-tips.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  padding: 100px;
+}</style>

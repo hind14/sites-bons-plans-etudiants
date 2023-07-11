@@ -1,12 +1,20 @@
 <template>
-    <div id="articles">
-        <h2> Liste de articles </h2>
+    <div id="articles" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <ul>
             <li v-for="article in articles" :key="article.id">
-                {{ article.title }}
-                {{ article.content }}
-                <img :src="article.image">
+                <router-link :to="{ name: 'display-one-article', params: { id: article.id } }">
+                    <img :src="article.image" class="rounded-t-lg">
+                    <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            {{ article.title }}
+                        </h5>
+                    </div>
 
+                </router-link>
+
+
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Salairé? Etudiant? Tu découvriras toutes les
+                    informations qui pourront t'aider au cours de formation ! </p>
                 <button
                     class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                     <router-link :to="{ name: 'display-one-article', params: { id: article.id } }">
@@ -41,4 +49,9 @@ export default {
     },
 }
 </script>
-<style scoped></style>
+<style scoped>
+#articles {
+    margin-top: 40px;
+    margin-left: 40px;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!submited.submited" class="grid grid-cols justify-items-center gap-4 content-center">
+  <div v-if="!submited.submited" id="signup" class="grid grid-cols justify-items-center gap-4 content-center">
     <h2>N'attendez plus, inscrivez-vous !</h2>
 
     <Form @submit="toSignUp" :validation-schema="schema" class="w-full max-w-lg">
@@ -82,10 +82,10 @@
       </div>
 
       <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">S'inscrire</button>
+        class="bg-purple-950 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-purple-950 rounded">S'inscrire</button>
     </Form>
 
-    <div>
+    <div id="to-login">
       Déja membre?
       <button
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
@@ -126,8 +126,8 @@ const schema = yup.object({
   age: yup.number().required("Ce champ est obligatoire").typeError("Veuillez indiquer uniqement des nombres"),
   email: yup.string().required("Ce champ est obligatoire").email("L'email n'est pas correct").trim(),
   password: yup.string().required("oups vous n'avez rien écrit")
-    .minNumbers(2, 'Le mot de passe doit contenir  au moins deux chiffres')
-    .max(20).typeError("Le mot de passe doit contenirune majuscule").trim("Ce champ esr obligatoire"),
+    .minNumbers(2, 'Le mot de passe doit contenir au moins deux chiffres')
+    .max(20).typeError("Le mot de passe doit contenir une majuscule").trim("Ce champ esr obligatoire"),
 })
 
 const submited = reactive({ submited: false })
@@ -154,7 +154,15 @@ const toSignUp = () => {
 </script>
 
 <style scoped>
-#signup-form {
-  border: 2px rgb(255, 238, 0) solid;
+#signup {
+  padding: 50px;
+}
+#signup>h2 {
+ padding-bottom: 40px;
+ font-weight: bold;
+ font-size: 20px;
+}
+#to-login {
+  padding-top: 50px ;
 }
 </style>

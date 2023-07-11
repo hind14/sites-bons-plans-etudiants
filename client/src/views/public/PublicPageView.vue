@@ -2,7 +2,9 @@
     <div id="public-page">
 
         <PublicNav />
+
         <router-view />
+ 
         <PulicFooter />
 
     </div>
@@ -20,5 +22,5 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 </style>

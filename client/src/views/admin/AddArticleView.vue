@@ -1,33 +1,23 @@
 <template>
-  <form v-if="!submited" @submit.prevent="sendArticle" enctype="multipart/form-data">
-    <div>
+  <div id="add-article">
+  <form id="form" v-if="!submited" @submit.prevent="sendArticle" enctype="multipart/form-data">
       <label for="title">Titre</label>
       <input required="true" type="text" id="title" v-model="article.title" name="title" />
-    </div>
 
-    <div id="content-field">
       <label for="content"></label>
-      <textarea required="true" type="text" id="content" v-model="article.content" placeholder="Ecrivez votre article..."
+      <textarea required="true" type="text" id="text-area" v-model="article.content" placeholder="Ecrivez votre article..."
         name="content">
       </textarea>
-    </div>
 
-    <div id="category-field">
       <label for="category"></label>
       <select required="true" id="category" v-model="article.category" name="category">
         <option>Choisir une option</option>
         <option value="Aide logement">Aide logement</option>
         <option value="Aides financières">Aides financières</option>
       </select>
-    </div>
 
-    <div>
-
-    </div>
-    <div>
       <label for="image"> Télécharger une image</label>
       <input type="file" :v-on="image" ref="image" @change="selectFile" />
-    </div>
 
     <button 
       class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
@@ -47,6 +37,7 @@
       <router-link to="/articles"> Retour à la liste des articles </router-link>
     </button>
   </div>
+</div>
 </template>
   
 <script>
@@ -83,4 +74,17 @@ export default {
 }
 </script>
   
-<style></style>
+<style scoped>
+#add-article {
+  padding: 50px;
+}
+#form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+#text-area {
+  width : 500px
+}
+</style>
